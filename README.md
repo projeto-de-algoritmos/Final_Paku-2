@@ -1,45 +1,38 @@
-**!! Atenção: Renomeie o seu repositório para (Tema)_(NomeDoProjeto). !!** 
+# Paku-Paku-2
 
-Temas:
- - Grafos1
- - Grafos2
- - PD
- - D&C
- - Greed
- - Final 
- 
- **!! *Não coloque os nomes dos alunos no título do repositório*. Exemplo de título correto: Grafos2_Labirinto-do-Minotauro !!**
- 
- (Apague essa seção)
-
-# NomedoProjeto
-
-**Número da Lista**: X<br>
-**Conteúdo da Disciplina**: XXXXXXXXXX<br>
+**Número da Lista**: -<br>
+**Conteúdo da Disciplina**: Grafos 2<br>
 
 ## Alunos
 |Matrícula | Aluno |
 | -- | -- |
-| xx/xxxxxx  |  xxxx xxxx xxxxx |
-| xx/xxxxxx  |  xxxx xxxx xxxxx |
+| 18/0113585 | Hugo Ricardo Souza Bezerra |
+| 18/0125770 | Lucas Gabriel Bezerra      |
 
 ## Sobre 
-Descreva os objetivos do seu projeto e como ele funciona. 
+<!-- O Paku-Paku é um jogo inspirado no Pac-Man. O objetivo do jogo é que o Paku consiga comer o maior número de bolhinhas possíveis sem ser capturado pelos fantasmas. Ao comer as bolhinhas especiais(maiores) o Paku consegue poderes, por 15 segundos, e fica forte o suficiente para comer os fantasmas, sabendo disso os fantasmas começam a fugir do Paku.-->
 
 ## Screenshots
-Adicione 3 ou mais screenshots do projeto em funcionamento.
+
+## Vídeo
+
+[![](https://www.youtube.com/watch?v=)](https://www.youtube.com/watch?v=)
+
+> https://www.youtube.com/watch?v=
 
 ## Instalação 
-**Linguagem**: xxxxxx<br>
-**Framework**: (caso exista)<br>
-Descreva os pré-requisitos para rodar o seu projeto e os comandos necessários.
+**Linguagem**: Python<br>
+**Framework**: --- <br>
+
+**Pré-requisitos** para rodar o Paku-Paku 2:
+* Instale o [Python](https://www.python.org/downloads/) (versão 3.8.5)
+* Instale o [Pyxel](https://github.com/kitao/pyxel/blob/master/README.pt.md) (versão 1.4.3)
+
+### Instalar e Executar (Sistema baseado em Debian)
+
+    $ pip3 install pyxel 
+    $ git clone https://github.com/projeto-de-algoritmos/Grafos2_Paku.git
+    $ cd Grafos2_Paku/paku
+    $ python3 game.py
 
 ## Uso 
-Explique como usar seu projeto caso haja algum passo a passo após o comando de execução.
-
-## Outros 
-Quaisquer outras informações sobre seu projeto podem ser descritas abaixo.
-
-
-
-
