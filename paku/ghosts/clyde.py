@@ -1,4 +1,4 @@
-from ghost import Ghost
+from ghosts.ghost import Ghost
 import utils
 
 class Clyde(Ghost):

@@ -1,5 +1,4 @@
 import graph
-# import player
 
 import pyxel
 import math

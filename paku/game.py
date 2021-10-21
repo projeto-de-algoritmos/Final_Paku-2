@@ -1,5 +1,5 @@
 import utils 
-import gamestate as gs
+import states.gamestate as gs
 
 import pyxel
 

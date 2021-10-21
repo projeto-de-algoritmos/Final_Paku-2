@@ -4,10 +4,10 @@ import player
 import pellets
 from buttons import PlayButton, Button, ExitButton
 
-from blinky import Blinky 
-from clyde import Clyde
-from pinky import Pinky
-from inky import Inky
+from ghosts.blinky import Blinky 
+from ghosts.clyde import Clyde
+from ghosts.pinky import Pinky
+from ghosts.inky import Inky
 
 import pyxel
 import random

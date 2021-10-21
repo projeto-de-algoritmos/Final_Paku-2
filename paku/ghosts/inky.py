@@ -1,5 +1,5 @@
 # from .blinky import Blinky
-from ghost import Ghost
+from ghosts.ghost import Ghost
 import utils
 
 class Inky(Ghost):
