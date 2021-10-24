@@ -13,6 +13,7 @@ class Button:
         self.is_on = False
         self.color = 0
         self.subcolor = 0
+        self.textCenter = False
 
     def update(self):
         """Atualiza o estado do botão"""
@@ -23,11 +24,12 @@ class Button:
         ...
         
 class CircleButton(Button):
-    def __init__(self, x, y, text, r=15):
-        super().__init__(x, y, text)
-        self.radius = r
+    def __init__(self, x, y, text, r=15, textCenter=False):
+        super().__init__(x, y, text, )
         self.color = 12
         self.subcolor = 5
+        self.radius = r
+        self.textCenter = textCenter
         
     def update(self):
         mouse_pos = [pyxel.mouse_x, pyxel.mouse_y]
@@ -55,8 +57,10 @@ class CircleButton(Button):
 
         if self.is_on: txt_color = 8
         else: txt_color = 7
-        
-        pyxel.text(align_text(self.posx, self.text), self.posy-self.offset, self.text, txt_color)
+        if self.textCenter:
+            pyxel.text(align_text(self.posx, self.text), self.posy-self.offset, self.text, txt_color)
+        else:
+            pyxel.text(align_text(self.posx, self.text), self.posy+self.radius+3, self.text, txt_color)
 
 class RectButton(Button):
     def __init__(self, x, y, text, w, h):
@@ -151,37 +155,3 @@ class ExitButton(CircleButton):
         pyxel.circ(self.posx+10,  self.posy-15-self.offset, 3, 0)
         pyxel.line(self.posx-10, self.posy+10-self.offset, self.posx+10, self.posy+10-self.offset, 0)
         pyxel.text(align_text(self.posx, self.text), self.posy+40, self.text, 7)
-        
-# class Button:
-#     def __init__(self, text, x, y):
-#         self.text = text
-#         self.posx = x
-#         self.posy = y
-#         self.isOn = False
-#         self.offset = 4
-#         self.radius = 15
-        
-#     def update(self):
-#         mouse_pos = [pyxel.mouse_x, pyxel.mouse_y]
-#         bpos = [self.posx, self.posy]
-
-#         if pyxel.btn(pyxel.MOUSE_LEFT_BUTTON) and  (dist(mouse_pos, bpos) < self.radius):
-#             self.offset = 0
-#         if pyxel.btnr(pyxel.MOUSE_LEFT_BUTTON) and  (dist(mouse_pos, bpos) < self.radius):
-            
-#             if self.isOn:
-#                 self.isOn = False
-#                 self.offset = 4
-#             else:
-#                 self.isOn = True
-#                 self.offset = 2
-
-#     def draw(self):
-
-#         pyxel.circ(self.posx, self.posy, self.radius, 5)
-#         pyxel.circ(self.posx, self.posy-self.offset, self.radius, 12)
-
-#         if self.isOn: txt_color = 8
-#         else: txt_color = 7
-        
-#         pyxel.text(align_text(self.posx, self.text), self.posy+17, self.text, txt_color)

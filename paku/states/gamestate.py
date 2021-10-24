@@ -27,14 +27,21 @@ ghosts.append(Clyde(utils.GRID_WIDTH-1, utils.GRID_HEIGHT-1))
 
 pellets_list = pellets.Pellets()
 
-mirror_b = CircleButton(utils.WIDTH/4-20, utils.HEIGHT/2, "Espelhar Labirinto" )
+# BOTOES MENU
 start_b = PlayButton(utils.WIDTH/2, utils.HEIGHT/2, "Jogar")
-dij_b = CircleButton(utils.WIDTH/2+utils.WIDTH/4+20, utils.HEIGHT/2, "Mostrar Dijkstra")
 
-restart_b = PlayButton(utils.WIDTH/2-60, utils.HEIGHT/2, "Jogar")
+records_b = CircleButton(utils.WIDTH/4-20, utils.HEIGHT/2, "Recordes")
+settings_b = CircleButton(utils.WIDTH/2+utils.WIDTH/4+20, utils.HEIGHT/2, "Ajustes")
+
+# BOTOES AJUSTES
+mirror_b = CircleButton(utils.WIDTH/4-20, utils.HEIGHT/4, "Espelhar Labirinto")
+dij_b = CircleButton(utils.WIDTH/2+utils.WIDTH/4+20, utils.HEIGHT/4, "Mostrar Dijkstra")
+
+# BOTOES GAME OVER
+restart_b = PlayButton(utils.WIDTH/2-60, utils.HEIGHT/2, "Menu")
 exit_b = ExitButton(utils.WIDTH/2+60, utils.HEIGHT/2, "Sair")
 
-records_back_b = CircleButton(15, 15, "<", 5)
+back_b = CircleButton(15, 15, "<", 5, textCenter=True)
 
 class GameState:
 
@@ -48,16 +55,21 @@ class GameState:
             pyxel.quit()
 
         if(self.state == "menu"):
-            if start_b.update():
-                print("start")
-            if mirror_b.update():
-                print("mirror")
-            if dij_b.update():
-                print("dij")
+            start_b.update()
+            records_b.update()
+            settings_b.update()
+
+            if records_b.is_on:
+                records_b.is_on = False
+                self.state = "records"
+
+            if settings_b.is_on:
+                settings_b.is_on = False
+                self.state = "settings"
 
             if start_b.is_on:
-                self.state = "start"
                 start_b.is_on = False
+                self.state = "start"
 
         if(self.state == "start"):
             pyxel.playm(0, loop=False)
@@ -170,25 +182,33 @@ class GameState:
                 restart_b.is_on = False
                 dij_b.is_on = False
         
-        if(self.state == "records"):
-            records_back_b.update()
-            if records_back_b.is_on:
-                records_back_b.is_on = False
-                self.state = "menu"
-            
+        elif self.state == "records":
+            back_b.update()
 
+            if back_b.is_on:
+                back_b.is_on = False
+                self.state = "menu"
+        
+        elif self.state == "settings":
+            back_b.update()
+            mirror_b.update()
+            dij_b.update()
+
+            if back_b.is_on:
+                back_b.is_on = False
+                self.state = "menu"
 
     def draw(self):
         pyxel.cls(1)
 
         if(self.state == "menu"):
             pyxel.cls(0)
-            title = 'PaKu PaKu'
+            title = 'PAKU PAKU 2'
             pyxel.text(utils.align_text(utils.WIDTH/2, title),40, title, 7)
             start_b.draw()
-            mirror_b.draw()
-            dij_b.draw()
-            
+            settings_b.draw()
+            records_b.draw()
+
         elif(self.state == "start"):
             utils.draw_grid()
             
@@ -250,11 +270,11 @@ class GameState:
             exit_b.draw()
         
         # records screen
-        elif(self.state == "records"):
+        elif self.state == "records":
             #|--|#|NOME|PONTOS|TMEPO|--|
             pyxel.cls(0)
             lst_records = []
-            records_back_b.draw()
+            back_b.draw()
             
             pos_id = utils.WIDTH/2-100
             pos_name = utils.WIDTH/2-80
@@ -277,3 +297,9 @@ class GameState:
                 pyxel.text(pos_name,   K+(10*i), f"{lst_records[i][0]}", 7)
                 pyxel.text(pos_points, K+(10*i), f"{lst_records[i][1]}", 7)
                 pyxel.text(pos_time,   K+(10*i), f"{(time//60):02d}:{(time%60):02d}", 7)
+
+        elif self.state == "settings":
+            pyxel.cls(0)
+            back_b.draw()
+            mirror_b.draw()
+            dij_b.draw()
