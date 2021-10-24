@@ -126,7 +126,32 @@ class PushButton(Button):
         
         pyxel.text(align_text(self.posx+1, self.text), self.posy-self.offset-1, self.text, 7)
 
+class PlayButton(CircleButton):
+    def __init__(self, x, y, text, ):
+        super().__init__(x, y, text)
+        self.radius = 30
 
+    def draw(self):
+        pyxel.circ(self.posx,  self.posy, self.radius, 9) # Sombra
+        pyxel.circ(self.posx,  self.posy-self.offset, self.radius, 10)
+        pyxel.circ(self.posx,  self.posy-15-self.offset, 3, 0)
+        pyxel.tri(self.posx, self.posy, self.posx+30, self.posy-20, self.posx+30, self.posy+20, 0)
+
+        pyxel.text(align_text(self.posx, self.text), self.posy+40, self.text, 7)
+
+class ExitButton(CircleButton):
+    def __init__(self, x, y, text):
+        super().__init__(x, y, text)
+        self.radius = 30
+
+    def draw(self):
+        pyxel.circ(self.posx,  self.posy, self.radius, 9) # Sombra
+        pyxel.circ(self.posx,  self.posy-self.offset, self.radius, 10)
+        pyxel.circ(self.posx-10,  self.posy-15-self.offset, 3, 0)
+        pyxel.circ(self.posx+10,  self.posy-15-self.offset, 3, 0)
+        pyxel.line(self.posx-10, self.posy+10-self.offset, self.posx+10, self.posy+10-self.offset, 0)
+        pyxel.text(align_text(self.posx, self.text), self.posy+40, self.text, 7)
+        
 # class Button:
 #     def __init__(self, text, x, y):
 #         self.text = text
@@ -160,30 +185,3 @@ class PushButton(Button):
 #         else: txt_color = 7
         
 #         pyxel.text(align_text(self.posx, self.text), self.posy+17, self.text, txt_color)
-
-class PlayButton(CircleButton):
-    def __init__(self, x, y, text, ):
-        super().__init__(x, y, text)
-        self.radius = 30
-
-    def draw(self):
-        pyxel.circ(self.posx,  self.posy, self.radius, 9) # Sombra
-        pyxel.circ(self.posx,  self.posy-self.offset, self.radius, 10)
-        pyxel.circ(self.posx,  self.posy-15-self.offset, 3, 0)
-        pyxel.tri(self.posx, self.posy, self.posx+30, self.posy-20, self.posx+30, self.posy+20, 0)
-
-        pyxel.text(align_text(self.posx, self.text), self.posy+40, self.text, 7)
-
-class ExitButton(CircleButton):
-    def __init__(self, x, y, text):
-        super().__init__(x, y, text)
-        self.radius = 30
-
-    def draw(self):
-        pyxel.circ(self.posx,  self.posy, self.radius, 9) # Sombra
-        pyxel.circ(self.posx,  self.posy-self.offset, self.radius, 10)
-        pyxel.circ(self.posx-10,  self.posy-15-self.offset, 3, 0)
-        pyxel.circ(self.posx+10,  self.posy-15-self.offset, 3, 0)
-        pyxel.line(self.posx-10, self.posy+10-self.offset, self.posx+10, self.posy+10-self.offset, 0)
-        pyxel.text(align_text(self.posx, self.text), self.posy+40, self.text, 7)
-        

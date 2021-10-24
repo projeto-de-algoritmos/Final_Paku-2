@@ -34,9 +34,12 @@ dij_b = CircleButton(utils.WIDTH/2+utils.WIDTH/4+20, utils.HEIGHT/2, "Mostrar Di
 restart_b = PlayButton(utils.WIDTH/2-60, utils.HEIGHT/2, "Jogar")
 exit_b = ExitButton(utils.WIDTH/2+60, utils.HEIGHT/2, "Sair")
 
+records_back_b = CircleButton(15, 15, "<", 5)
+
 class GameState:
 
     def __init__(self):
+        self.timer = 0
         self.state = "menu"
         self.points = 0
 
@@ -112,7 +115,10 @@ class GameState:
         elif(self.state == "run"):
             player1.update()
             (player1.atNode)
-
+            
+            if pyxel.frame_count % 30 == 0 and player1.isAlive:
+                self.timer += 1
+            
             ghosts[1].blinky_pos = [ghosts[0].posX, ghosts[0].posY]
             for ghost in ghosts:
                 ghost.update(player1.atNode, player1.facing)
@@ -137,10 +143,12 @@ class GameState:
             for ghost in ghosts:
                 # print(ghost.atNode.get_id())
                 if player1.atNode.get_id() == ghost.atNode.get_id():
-                    if ghost.state == "chase":
+                    if ghost.state == "chase" and player1.isAlive:
                         player1.kill_player()
                         pyxel.playm(1, loop=False)
-                        # player1.isAlive = False
+
+                        
+                        utils.register_record("PLAYER", player1.points, self.timer)
                     elif ghost.state == "frightened":
                         player1.points += 100
                         ghost.change_state("eaten")
@@ -148,11 +156,10 @@ class GameState:
             if pellets_list.pellets_dict == {}:
                 self.state = "win"
 
-            if player1.isAlive == False:
+            if not player1.isAlive and pyxel.frame_count % player1.death_animation >= 70:
+                # utils.register_record(player1.points, self.timer)
                 self.state = "game_over"
 
-                    
-            
         elif(self.state == "win" or self.state == "game_over"):
             restart_b.update()
             exit_b.update()
@@ -162,8 +169,13 @@ class GameState:
                 self.state = "menu"
                 restart_b.is_on = False
                 dij_b.is_on = False
-
-                
+        
+        if(self.state == "records"):
+            records_back_b.update()
+            if records_back_b.is_on:
+                records_back_b.is_on = False
+                self.state = "menu"
+            
 
 
     def draw(self):
@@ -201,7 +213,8 @@ class GameState:
             for i in range(0, len(utils.edges)):
                 utils.cave_paint(utils.edges[i][0], utils.edges[i][1])
             
-            pyxel.text(10, utils.HEIGHT-10, """Pressione "P" remover o som de Paku""", 7)
+            # pyxel.text(10, utils.HEIGHT-10, """Pressione "P" remover o som de Paku""", 7)
+            pyxel.text(20, utils.HEIGHT-10,  f"TEMPO: {(self.timer//60):02d}:{(self.timer%60):02d}", 7)
             pyxel.text(utils.WIDTH-60, utils.HEIGHT-10, f'PONTOS: {player1.points}', 7)
 
             if dij_b.is_on:
@@ -235,4 +248,32 @@ class GameState:
             pyxel.text(utils.align_text(utils.WIDTH/2, text_gameOver),utils.HEIGHT/2-20, text_gameOver, 7)
             restart_b.draw()
             exit_b.draw()
+        
+        # records screen
+        elif(self.state == "records"):
+            #|--|#|NOME|PONTOS|TMEPO|--|
+            pyxel.cls(0)
+            lst_records = []
+            records_back_b.draw()
+            
+            pos_id = utils.WIDTH/2-100
+            pos_name = utils.WIDTH/2-80
+            pos_points = utils.WIDTH/2-10
+            pos_time = utils.WIDTH/2+60
+            
+            pyxel.text(utils.align_text(utils.WIDTH/2, "RECORDS - TOP 10"), 10, "RECORDS - TOP 10", 7)
+            
+            # pyxel.text(pos_id, 30, "", 7)
+            pyxel.text(pos_name,   35, "NOME", 7)
+            pyxel.text(pos_points, 35, "PONTOS", 7)
+            pyxel.text(pos_time,   35, "TEMPO", 7)
 
+            if len(lst_records) == 0:
+                lst_records = utils.mergeSort(utils.get_records())
+            K = 45
+            for i in range(0, min(len(lst_records), 10)):
+                time = int(lst_records[i][2])
+                pyxel.text(pos_id,     K+(10*i), f"#{i+1}", 7)
+                pyxel.text(pos_name,   K+(10*i), f"{lst_records[i][0]}", 7)
+                pyxel.text(pos_points, K+(10*i), f"{lst_records[i][1]}", 7)
+                pyxel.text(pos_time,   K+(10*i), f"{(time//60):02d}:{(time%60):02d}", 7)

@@ -16,11 +16,11 @@ class Player(Entity):
     def update(self):
         self.atNode = utils.get_node_in_grid(self.posX, self.posY)
 
-        if self.death_animation != 0:
-            if pyxel.frame_count % self.death_animation > 70:
-                self.isAlive = False 
+        # if self.death_animation != 0:
+        #     if pyxel.frame_count % self.death_animation > 70:
+        #         self.isAlive = False 
                 
-        else:
+        if self.isAlive:
         
             if (self.posX+7)%15 == 0 and (self.posY+7)%15 == 0:
                 self.canTurn = True
@@ -72,6 +72,7 @@ class Player(Entity):
 
 
     def kill_player(self):
+        self.isAlive = False
         if self.death_animation == 0:    
             self.death_animation = pyxel.frame_count
 

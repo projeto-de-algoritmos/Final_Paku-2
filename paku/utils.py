@@ -191,6 +191,64 @@ def mirror():
     return new_path
 
 
+def register_record(name, points, time):
+    file = open("paku/paku_records.txt", "a")
+
+    file.write(f"{name} {points} {time}\n")
+    file.close()
+
+def get_records():
+    records = []
+    file = open("paku/paku_records.txt", "r")
+    
+    lines = file.readlines()
+
+    for line in lines:
+        name, points, time = line.strip().split(" ")
+        records.append([name, points, time])
+
+    file.close()
+
+    return records
+
+# MERGE SORT Adaptado com desempate
+def mergeSort(lst):
+    if len(lst) > 1:
+        mid = len(lst)//2
+  
+        i = j = k = 0
+        left = lst[:mid]
+        right = lst[mid:]
+        mergeSort(left)
+        mergeSort(right)
+  
+        while i < len(left) and j < len(right):
+            if left[i][1] >= right[j][1]:
+                if left[i][1] == right[j][1]:
+                    if  left[i][2] < right[j][2]:
+                        lst[k] = left[i]
+                        i += 1
+                    else:
+                        lst[k] = right[j]
+                        j += 1
+                else:
+                    lst[k] = left[i]
+                    i += 1
+            else:
+                lst[k] = right[j]
+                j += 1
+            k += 1
+  
+        while i < len(left):
+            lst[k] = left[i]
+            i += 1
+            k += 1
+  
+        while j < len(right):
+            lst[k] = right[j]
+            j += 1
+            k += 1
+    return lst
 
 # DEBUG
 
