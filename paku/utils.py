@@ -1,7 +1,7 @@
 import graph
 
 import pyxel
-import math
+from math import dist
 
 WIDTH = 256
 HEIGHT = 196
@@ -13,7 +13,6 @@ path = graph.Graph()
 edges = []
 delay = 220
 
-
 def align_text(x, str):
     n = len(str)
     return (x - (n * pyxel.FONT_WIDTH) / 2)
@@ -24,6 +23,17 @@ def col_mouse_bt(mx, my, btx, bty, btw, bth):
     """
     if (btx+(btw/2) > mx > btx-(btw/2)) and (bty+(bth/2) > my > bty-(bth/2)-4):
         return True
+    else:
+        return False
+
+def col_player_ghost(px, py, gx, gy):
+    """
+        Verifica Colisão Player-Ghost
+    """
+    if dist([px, py], [gx, gy]) < 11:
+        return True
+    else:
+        return False
 
 def inv_dir(dir):
     new_dir = ""
@@ -249,13 +259,3 @@ def mergeSort(lst):
             j += 1
             k += 1
     return lst
-
-# DEBUG
-
-# DESCOBRE QUANTAS CELULAS POSSO TER
-# for i in range(1, 21):
-#     print("pixels por celula: ")
-#     print((256-i-1)/i)
-#     print("celulas: ")
-#     print(i)
-#     print()

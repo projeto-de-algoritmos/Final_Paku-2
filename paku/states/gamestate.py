@@ -37,11 +37,11 @@ settings_b = CircleButton(utils.WIDTH/2+utils.WIDTH/4+20, utils.HEIGHT/2, "Ajust
 mirror_b = CircleButton(utils.WIDTH/4-20, utils.HEIGHT/4, "Espelhar Labirinto")
 dij_b = CircleButton(utils.WIDTH/2+utils.WIDTH/4+20, utils.HEIGHT/4, "Mostrar Dijkstra")
 
+back_b = CircleButton(15, 15, "<", 5, textCenter=True)
+
 # BOTOES GAME OVER
 restart_b = PlayButton(utils.WIDTH/2-60, utils.HEIGHT/2, "Menu")
 exit_b = ExitButton(utils.WIDTH/2+60, utils.HEIGHT/2, "Sair")
-
-back_b = CircleButton(15, 15, "<", 5, textCenter=True)
 
 class GameState:
 
@@ -88,6 +88,7 @@ class GameState:
             utils.path.reset()
             utils.edges = []
             utils.delay = 0
+            # utils.delay = 220
 
             for i in range(0, utils.GRID_WIDTH):
                 for j in range(0, utils.GRID_HEIGHT):
@@ -154,12 +155,12 @@ class GameState:
             # PLAYER GHOST COLISÃO
             for ghost in ghosts:
                 # print(ghost.atNode.get_id())
-                if player1.atNode.get_id() == ghost.atNode.get_id():
+                if utils.col_player_ghost(player1.posX, player1.posY, ghost.posX, ghost.posY):
+                # if player1.atNode.get_id() == ghost.atNode.get_id():
                     if ghost.state == "chase" and player1.isAlive:
                         player1.kill_player()
                         pyxel.playm(1, loop=False)
 
-                        
                         utils.register_record("PLAYER", player1.points, self.timer)
                     elif ghost.state == "frightened":
                         player1.points += 100

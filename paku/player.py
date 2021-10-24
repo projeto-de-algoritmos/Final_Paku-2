@@ -15,10 +15,6 @@ class Player(Entity):
 
     def update(self):
         self.atNode = utils.get_node_in_grid(self.posX, self.posY)
-
-        # if self.death_animation != 0:
-        #     if pyxel.frame_count % self.death_animation > 70:
-        #         self.isAlive = False 
                 
         if self.isAlive:
         
