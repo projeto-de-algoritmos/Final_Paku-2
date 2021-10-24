@@ -2,7 +2,7 @@ import utils
 import prim
 import player
 import pellets
-from buttons import PlayButton, Button, ExitButton
+from buttons import PlayButton, CircleButton, ExitButton
 
 from ghosts.blinky import Blinky 
 from ghosts.clyde import Clyde
@@ -27,12 +27,12 @@ ghosts.append(Clyde(utils.GRID_WIDTH-1, utils.GRID_HEIGHT-1))
 
 pellets_list = pellets.Pellets()
 
-mirror_b = Button("Espelhar Labirinto", utils.WIDTH/4-20, utils.HEIGHT/2 )
-start_b = PlayButton("Jogar", utils.WIDTH/2, utils.HEIGHT/2 )
-dij_b = Button("Mostrar Dijkstra", utils.WIDTH/2+utils.WIDTH/4+20, utils.HEIGHT/2 )
+mirror_b = CircleButton(utils.WIDTH/4-20, utils.HEIGHT/2, "Espelhar Labirinto" )
+start_b = PlayButton(utils.WIDTH/2, utils.HEIGHT/2, "Jogar")
+dij_b = CircleButton(utils.WIDTH/2+utils.WIDTH/4+20, utils.HEIGHT/2, "Mostrar Dijkstra")
 
-restart_b = PlayButton("Jogar", utils.WIDTH/2-60, utils.HEIGHT/2 )
-exit_b = ExitButton("Sair", utils.WIDTH/2+60, utils.HEIGHT/2 )
+restart_b = PlayButton(utils.WIDTH/2-60, utils.HEIGHT/2, "Jogar")
+exit_b = ExitButton(utils.WIDTH/2+60, utils.HEIGHT/2, "Sair")
 
 class GameState:
 
@@ -52,9 +52,9 @@ class GameState:
             if dij_b.update():
                 print("dij")
 
-            if start_b.isOn:
+            if start_b.is_on:
                 self.state = "start"
-                start_b.isOn = False
+                start_b.is_on = False
 
         if(self.state == "start"):
             pyxel.playm(0, loop=False)
@@ -70,7 +70,7 @@ class GameState:
             pellets_list.fill_dict()
 
             utils.g.reset()
-            utils.path.reset
+            utils.path.reset()
             utils.edges = []
             utils.delay = 0
 
@@ -95,9 +95,9 @@ class GameState:
 
             # utils.path, utils.edges = utils.mirror(utils.path, utils.edges)
 
-            if mirror_b.isOn:
+            if mirror_b.is_on:
                 utils.path = utils.mirror()
-                mirror_b.isOn = False
+                mirror_b.is_on = False
 
             self.state = "prim"
                 
@@ -156,12 +156,12 @@ class GameState:
         elif(self.state == "win" or self.state == "game_over"):
             restart_b.update()
             exit_b.update()
-            if exit_b.isOn:
+            if exit_b.is_on:
                 pyxel.quit()
-            if restart_b.isOn:
+            if restart_b.is_on:
                 self.state = "menu"
-                restart_b.isOn = False
-                dij_b.isOn = False
+                restart_b.is_on = False
+                dij_b.is_on = False
 
                 
 
@@ -172,7 +172,7 @@ class GameState:
         if(self.state == "menu"):
             pyxel.cls(0)
             title = 'PaKu PaKu'
-            pyxel.text(utils.align_fix(utils.WIDTH/2, title),40, title, 7)
+            pyxel.text(utils.align_text(utils.WIDTH/2, title),40, title, 7)
             start_b.draw()
             mirror_b.draw()
             dij_b.draw()
@@ -204,7 +204,7 @@ class GameState:
             pyxel.text(10, utils.HEIGHT-10, """Pressione "P" remover o som de Paku""", 7)
             pyxel.text(utils.WIDTH-60, utils.HEIGHT-10, f'PONTOS: {player1.points}', 7)
 
-            if dij_b.isOn:
+            if dij_b.is_on:
                 if ghosts[0].gost_path != []:
                     for i in ghosts[0].gost_path:
                         pos = utils.coord_int(i)
@@ -221,8 +221,8 @@ class GameState:
         elif(self.state == "win"):
             pyxel.cls(0)
             text_score = f'PONTOS: {player1.points}'
-            pyxel.text(utils.align_fix(utils.WIDTH/2, "Ganhou!") -1, utils.HEIGHT/2, "Ganhou!", 7)
-            pyxel.text(utils.align_fix(utils.WIDTH/2, text_score) -1, utils.HEIGHT/2, text_score, 7)
+            pyxel.text(utils.align_text(utils.WIDTH/2, "Ganhou!") -1, utils.HEIGHT/2, "Ganhou!", 7)
+            pyxel.text(utils.align_text(utils.WIDTH/2, text_score) -1, utils.HEIGHT/2, text_score, 7)
             restart_b.draw()
             exit_b.draw()
 
@@ -231,8 +231,8 @@ class GameState:
             text_score = f'PONTOS: {player1.points}'
             text_gameOver = 'GAME OVER'
             # pyxel.text(utils.x_fix(utils.WIDTH/2, txt)-1, utils.HEIGHT/2+70-1, txt, outline_col)
-            pyxel.text(utils.align_fix(utils.WIDTH/2, text_score) -1, utils.HEIGHT/2, text_score, 7)
-            pyxel.text(utils.align_fix(utils.WIDTH/2, text_gameOver),utils.HEIGHT/2-20, text_gameOver, 7)
+            pyxel.text(utils.align_text(utils.WIDTH/2, text_score) -1, utils.HEIGHT/2, text_score, 7)
+            pyxel.text(utils.align_text(utils.WIDTH/2, text_gameOver),utils.HEIGHT/2-20, text_gameOver, 7)
             restart_b.draw()
             exit_b.draw()
 
