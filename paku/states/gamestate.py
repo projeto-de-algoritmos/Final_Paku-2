@@ -107,8 +107,12 @@ class GameState:
                     if(j != utils.GRID_HEIGHT-1):
                         utils.g.add_edge(utils.coord_str(i, j), utils.coord_str(i, j+1), random.randint(1, 20))
 
+            # edges = Lista de arestas (string)
+            # path  = Objeto Grafo com as conexões presentes no labirinto
             start = utils.coord_str(random.randint(0, utils.GRID_WIDTH-1), random.randint(0, utils.GRID_HEIGHT-1))
             utils.path, utils.edges = prim.prim_maze(utils.g, start, utils.edges)
+
+            # print(utils.edges)
 
             if mirror_b.is_on:
                 utils.path = utils.mirror()

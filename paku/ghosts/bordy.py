@@ -66,20 +66,21 @@ class Bordy(Ghost):
     # Bellman Ford
     def calc_target_bellman (self, player_node):
         dist = {}
+        path = {}
         edges = []
 
-        g = utils.path
-
-        for node in g:
+        graph = utils.path
+        
+        for node in graph:
             dist.update({node.get_id(): float("Inf")})
             for bro in node.get_bros():
-                edges.append([node.get_id(), bro.get_id(), random.randint(1,10)])
-
+                edges.append([node.get_id(), bro.get_id()])
+        
         dist.update({player_node.get_id(): 0})
 
-        path = {}
-        for _ in range(g.num_nodes - 1):
-            for u, v, w in edges:
+        for _ in range(graph.num_nodes - 1):
+            for u, v in edges:
+                w = 1 # random.randint(1,10)
                 if dist[u] != float("Inf") and dist[u] + w < dist[v]:
                     dist[v] = dist[u] + w
                     path.update({v:u})
@@ -90,9 +91,6 @@ class Bordy(Ghost):
         while current != player_node.get_id():
             self.ghost_path.append(path[current])
             current = path[current]
-
-        print("GHOST PATH")
-        print(self.ghost_path)
 
     def reset(self, x, y):
         super().reset(x, y)
