@@ -1,131 +1,107 @@
 from graph import Graph
+from prim import breakWalls
 import utils
+import random
 
-# def buildTree(tree, edges):
-#     for i in range(0, utils.GRID_WIDTH):
-#         for j in range(0, utils.GRID_HEIGHT):
-#             tree.add_node(utils.coord_str(i, j))
+def buildTree(edges):
+    tree = Graph()
+    for i in range(0, utils.GRID_WIDTH):
+        for j in range(0, utils.GRID_HEIGHT):
+            tree.add_node(utils.coord_str(i, j))
 
-#     for edge in edges:
-#         tree.add_edge(edge[0], edge[1], 1)
+    for edge in edges:
+        tree.add_edge(edge[0], edge[1], 1)
+    return tree
 
-def find(parent, i):
-		if parent[i] == i:
-			return i
-		return find(parent, parent[i])
 
-# A function that does union of two sets of x and y
-# (uses union by rank)
+def breakWalls(path: Graph, edges):
+    print(path.node_dict)
+    for i in range(0, utils.GRID_WIDTH):
+        for j in range(0, utils.GRID_HEIGHT):
+            node = path.node_dict[utils.coord_str(i, j)]
+
+
+            if len(node.get_bros()) == 1:
+                side = [1, 2, 3, 4]
+                coords = utils.coord_int(node.get_id())
+
+                for bro in node.get_bros():
+                    bro_coords = utils.coord_int(bro.get_id())
+
+                if coords[0] > bro_coords[0]: # bro a esquerda
+                    side.remove(3)
+                elif coords[0] < bro_coords[0]: # bro a direita
+                    side.remove(1)
+                elif coords[1] > bro_coords[1]: # bro acima
+                    side.remove(4)
+                elif coords[1] < bro_coords[1]: # bro abaixo
+                    side.remove(2)
+
+                if(coords[0] == 0):
+                    side.remove(3)
+                if(coords[1] == 0):
+                    side.remove(4)
+                if(coords[0] == utils.GRID_WIDTH-1):
+                    side.remove(1)
+                if(coords[1] == utils.GRID_HEIGHT-1):
+                    side.remove(2)
+
+                s = random.choice(side)
+                side.remove(s)
+
+                if s == 1: # DIREITA
+                    next_node = path.get_node(utils.coord_str(coords[0]+1, coords[1]))
+                elif s == 2: # BAIXO
+                    next_node = path.get_node(utils.coord_str(coords[0], coords[1]+1))
+                elif s == 3: # ESQUERDA
+                    next_node = path.get_node(utils.coord_str(coords[0]-1, coords[1]))
+                elif s == 4: # CIMA
+                    next_node = path.get_node(utils.coord_str(coords[0], coords[1]-1))
+
+                path.add_edge(node.get_id(), next_node.get_id(), 0)
+                edges.append((node.get_id(), next_node.get_id()))
+
+
+def find(parent, item):
+    if parent[item] == item:
+        return item
+    return find(parent, parent[item])
+
 def union(parent, rank, x, y):
     xroot = find(parent, x)
     yroot = find(parent, y)
-
-    # Attach smaller rank tree under root of
-    # high rank tree (Union by Rank)
     if rank[xroot] < rank[yroot]:
         parent[xroot] = yroot
     elif rank[xroot] > rank[yroot]:
         parent[yroot] = xroot
-
-    # If ranks are same, then make one as root
-    # and increment its rank by one
     else:
         parent[yroot] = xroot
         rank[xroot] += 1
 
-# The main function to construct MST using Kruskal's
-    # algorithm
-def KruskalMST(graph):
-
-    result = [] # This will store the resultant MST
-    
-    # An index variable, used for sorted edges
-    i = 0
-    edges = []
-    # An index variable, used for result[]
-    e = 0
+def kruskal(graph, edges):
+    path = Graph()
+    i, e = 0, 0
+    parent = {}
+    # edges = []
+    #Todas as edges
+    lst_edges = []
     for node in graph:
+        parent[node.get_id()] = node.get_id()
         for bro in node.get_bros():
-            edges.append([node.get_id(), bro.get_id(), node.get_weight(bro)])
-    # Step 1: Sort all the edges in
-    # non-decreasing order of their
-    # weight. If we are not allowed to change the
-    # given graph, we can create a copy of graph
-    edges = sorted(edges,
-                        key=lambda item: item[2])
-    parent = []
-    rank = []
-
-    # Create V subsets with single elements
-    for node in range(graph.num_nodes):
-        parent.append(node)
-        rank.append(0)
-
-    # Number of edges to be taken is equal to V-1
+            lst_edges.append([node.get_id(), bro.get_id(), node.get_weight(bro)])
+    
+    rank = dict.fromkeys(graph.node_dict, 0)
+    lst_edges = sorted(lst_edges, key=lambda item: item[2])
     while e < graph.num_nodes - 1:
-
-        # Step 2: Pick the smallest edge and increment
-        # the index for next iteration
-        u, v, w = edges[i]
-        i = i + 1
-        x = find(parent, u)
-        y = find(parent, v)
-
-        # If including this edge does't
-        # cause cycle, include it in result
-        # and increment the indexof result
-        # for next edge
+        s, d, _ = lst_edges[i]
+        i += 1
+        x = find(parent, s)
+        y = find(parent, d)
         if x != y:
-            e = e + 1
-            result.append([u, v, w])
-            
-            union(parent, rank, x, y)
-        # Else discard the edge
-    minimumCost = 0
-    for u, v, weight in result:
-        minimumCost += weight
-    print(minimumCost)
-    print(result)
-    print(parent)
-
-    # for edge in result:
-    #     ans_g = graph.Graph()
-    #     ans_e = []
-    #     ans_g.add_edge(edge[0], edge[1], edge[2])
-    #     ans_e.append((edge[0], edge[1]))
-
-
-g = Graph()
-# g.add_edge(0,1,4)
-# g.add_edge(0,7,8)
-# g.add_edge(1,7,11)
-# g.add_edge(1,2,8)
-# g.add_edge(7,8,7)
-# g.add_edge(7,6,1)
-# g.add_edge(2,8,2)
-# g.add_edge(2,3,7)
-# g.add_edge(2,5,4)
-# g.add_edge(6,8,6)
-# g.add_edge(6,5,2)
-# g.add_edge(5,3,14)
-# g.add_edge(5,4,10)
-# g.add_edge(3,4, 9)
-
-g.add_edge("0-0","0-1", 4)
-g.add_edge("0-0","3-4", 8)
-g.add_edge("0-1","3-4", 11)
-g.add_edge("0-1","1-1", 8)
-g.add_edge("3-4","4-4", 7)
-g.add_edge("3-4","3-3", 1)
-g.add_edge("1-1","4-4", 2)
-g.add_edge("1-1","1-2", 7)
-g.add_edge("1-1","2-3", 4)
-g.add_edge("3-3","4-4", 6)
-g.add_edge("3-3","2-3", 2)
-g.add_edge("2-3","1-2", 14)
-g.add_edge("2-3","2-2", 10)
-g.add_edge("1-2","2-2", 9)
-
-ed = KruskalMST(g)
-
-print(ed)
+            e += 1
+            edges.append((s,d))
+            union(parent, rank, x,y)
+    
+    path = buildTree(edges)
+    breakWalls(path, edges)
+    return path, edges
