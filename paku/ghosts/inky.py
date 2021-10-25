@@ -7,7 +7,7 @@ class Inky(Ghost):
         self.color = 6
         self.base_color = 6
         self.facing = "left"
-        self.blinky_pos = [0, 0]
+        self.friend_pos = [0, 0]
 
     def update(self, _, __):
         super().update()
@@ -37,7 +37,7 @@ class Inky(Ghost):
 
     def calc_target(self):
 
-        target = [utils.GRID_WIDTH-1-self.blinky_pos[0], utils.GRID_HEIGHT-1-self.blinky_pos[1]]
+        target = [utils.GRID_WIDTH-1-self.friend_pos[0], utils.GRID_HEIGHT-1-self.friend_pos[1]]
         ghost_pos = utils.coord_int(self.atNode.get_id())
 
         valid_dir = self.directions()
@@ -64,4 +64,4 @@ class Inky(Ghost):
         self.color = 11
         self.base_color = 11
         self.facing = "left"
-        self.blinky_pos = [0, 0]
+        self.friend_pos = [0, 0]

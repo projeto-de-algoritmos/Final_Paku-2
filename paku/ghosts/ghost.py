@@ -15,7 +15,7 @@ class Ghost(Entity):
         self.target = None
         self.color = 0
         self.base_color = 0
-        self.gost_path = []
+        self.ghost_path = []
         self.countdown = 0
 
     def update(self):

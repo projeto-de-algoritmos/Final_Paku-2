@@ -1,5 +1,14 @@
 import graph
 
+# import ghosts.ghost
+# import ghosts.blinky
+# import ghosts.
+# import ghosts.
+# import ghosts.
+# import ghosts.
+
+from ghosts import ghost, blinky, bordy, inky, pinky, clyde
+
 import pyxel
 from math import dist
 
@@ -89,6 +98,30 @@ def coord_str(x, y):
 def coord_int(coord):
     st = coord.split("-")
     return [int(st[0]), int(st[1])]
+
+def pick_ghost(id, pos_id):
+    
+    pos = []
+
+    if pos_id == 0:
+        pos = [0, 0]
+    elif pos_id == 1:
+        pos = [0, GRID_HEIGHT-1]
+    elif pos_id == 2:
+        pos = [GRID_WIDTH-1, 0]
+    elif pos_id == 3:
+        pos = [GRID_WIDTH-1, GRID_HEIGHT-1]
+
+    if id == 0:
+        return blinky.Blinky(pos[0], pos[1])
+    elif id == 1:
+        return inky.Inky(pos[0], pos[1])
+    elif id == 2:
+        return pinky.Pinky(pos[0], pos[1])
+    elif id == 3:
+        return clyde.Clyde(pos[0], pos[1])
+    elif id == 4:
+        return bordy.Bordy(pos[0], pos[1])
 
 def get_close_node(node: graph.Node, direction):
     coords = coord_int(node.get_id())

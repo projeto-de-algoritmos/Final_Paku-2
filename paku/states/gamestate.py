@@ -1,9 +1,8 @@
-from kruskal import kruskal
 import utils
 import prim
 import player
 import pellets
-from buttons import PlayButton, CircleButton, ExitButton
+from buttons import PlayButton, CircleButton, ExitButton, PushButton
 import kruskal
 
 from ghosts.bordy import Bordy
@@ -18,11 +17,7 @@ import random
 
 player1 = player.Player()
 ghosts = []
-# ghosts.append(Blinky(0, 0))
-ghosts.append(Bordy(0, 0))
-ghosts.append(Inky(0, utils.GRID_HEIGHT-1))
-ghosts.append(Pinky(utils.GRID_WIDTH-1, 0))
-ghosts.append(Clyde(utils.GRID_WIDTH-1, utils.GRID_HEIGHT-1))
+ghosts_id = [0, 1, 2, 3]
 
 # ghosts[0].state = "eaten"
 # ghosts[1].state = "eaten"
@@ -40,10 +35,14 @@ settings_b = CircleButton(utils.WIDTH/2+utils.WIDTH/4+20, utils.HEIGHT/2, "Ajust
 # BOTOES AJUSTES
 mirror_b = CircleButton(utils.WIDTH/4-20, utils.HEIGHT/4, "Espelhar Labirinto")
 dij_b = CircleButton(utils.WIDTH/2+utils.WIDTH/4+20, utils.HEIGHT/4, "Mostrar Dijkstra")
+bf_b = CircleButton(utils.WIDTH/2, utils.HEIGHT/4, "Mostrar Bellman-Ford")
 kruskal_b = CircleButton(utils.WIDTH/4-20, 3*(utils.HEIGHT/4), "kruskal")
 prim_b = CircleButton(utils.WIDTH/2+utils.WIDTH/4+20, 3*(utils.HEIGHT/4), "Prim")
-# Prim como ON
-prim_b.is_on = True
+
+ghost1_b = PushButton(80,  utils.HEIGHT-30, "Ghost 1", 10)
+ghost2_b = PushButton(110, utils.HEIGHT-30, "Ghost 2", 10)
+ghost3_b = PushButton(140, utils.HEIGHT-30, "Ghost 3", 10)
+ghost4_b = PushButton(170, utils.HEIGHT-30, "Ghost 4", 10)
 
 back_b = CircleButton(15, 15, "<", 5, textCenter=True)
 
@@ -84,10 +83,9 @@ class GameState:
 
             player1.reset()
 
-            ghosts[0].reset(0, 0)
-            ghosts[1].reset(0, utils.GRID_HEIGHT-1)
-            ghosts[2].reset(utils.GRID_WIDTH-1, 0)
-            ghosts[3].reset(utils.GRID_WIDTH-1, utils.GRID_HEIGHT-1)
+            ghosts.clear()
+            for i in range(4):
+                ghosts.append(utils.pick_ghost(ghosts_id[i], i))
 
             pellets_list.reset()
             pellets_list.fill_dict()
@@ -119,7 +117,7 @@ class GameState:
                 start = utils.coord_str(random.randint(0, utils.GRID_WIDTH-1), random.randint(0, utils.GRID_HEIGHT-1))
                 utils.path, utils.edges = prim.prim_maze(utils.g, start, utils.edges)
             else:
-                utils.path, utils.edges = kruskal.kruskal(utils.g, utils.edges)
+                utils.path, utils.edges = kruskal.kruskal_maze(utils.g, utils.edges)
 
             if mirror_b.is_on:
                 utils.path = utils.mirror()
@@ -143,9 +141,10 @@ class GameState:
             if pyxel.frame_count % 30 == 0 and player1.isAlive:
                 self.timer += 1
             
-            ghosts[1].blinky_pos = [ghosts[0].posX, ghosts[0].posY]
-            for ghost in ghosts:
-                ghost.update(player1.atNode, player1.facing)
+            for i in range(len(ghosts)):
+                if ghosts[i].base_color == 6:
+                    ghosts[i].friend_pos = [ghosts[(i+1)%4].posX, ghosts[(i+1)%4].posY]
+                ghosts[i].update(player1.atNode, player1.facing)
 
             if pyxel.btnp(pyxel.KEY_P):
                 pyxel.stop()
@@ -190,6 +189,7 @@ class GameState:
                 self.state = "menu"
                 restart_b.is_on = False
                 dij_b.is_on = False
+                bf_b.is_on = False
         
         elif self.state == "records":
             back_b.update()
@@ -199,22 +199,32 @@ class GameState:
                 self.state = "menu"
         
         elif self.state == "settings":
-            #Prim inicia como ligado
-            last_kruskal = kruskal_b.is_on
-            last_prim = prim_b.is_on
 
             back_b.update()
             mirror_b.update()
             dij_b.update()
+            bf_b.update()
+
+            if ghost1_b.update():
+                ghosts_id[0] = (ghosts_id[0]+1)%5
+            if ghost2_b.update():
+                ghosts_id[1] = (ghosts_id[1]+1)%5
+            if ghost3_b.update():
+                ghosts_id[2] = (ghosts_id[2]+1)%5
+            if ghost4_b.update():
+                ghosts_id[3] = (ghosts_id[3]+1)%5
+
             prim_b.update()
+            if prim_b.is_on:
+                kruskal_b.is_on = False
+            else:
+                kruskal_b.is_on = True
+
             kruskal_b.update()
-
-            # kruskal_b.is_on = not prim_b.is_on
-            if kruskal_b.is_on != last_kruskal:
-                prim_b.is_on = last_kruskal
-
-            if prim_b.is_on != last_prim:
-                kruskal_b.is_on = last_prim
+            if kruskal_b.is_on:
+                prim_b.is_on = False
+            else:
+                prim_b.is_on = True
 
             if back_b.is_on:
                 back_b.is_on = False
@@ -257,11 +267,12 @@ class GameState:
             pyxel.text(20, utils.HEIGHT-10,  f"TEMPO: {(self.timer//60):02d}:{(self.timer%60):02d}", 7)
             pyxel.text(utils.WIDTH-60, utils.HEIGHT-10, f'PONTOS: {player1.points}', 7)
 
-            if dij_b.is_on:
-                if ghosts[0].gost_path != []:
-                    for i in ghosts[0].gost_path:
-                        pos = utils.coord_int(i)
-                        pyxel.circ(utils.align_in_grid(pos[0]), utils.align_in_grid(pos[1]), 2, 8)
+            for i in range(len(ghosts)):
+                if ghosts[i].ghost_path != []:
+                    if (ghosts[i].base_color == 8 and dij_b.is_on) or (ghosts[i].base_color == 2 and bf_b.is_on):
+                        for j in ghosts[i].ghost_path:
+                            pos = utils.coord_int(j)
+                            pyxel.circ(utils.align_in_grid(pos[0]), utils.align_in_grid(pos[1]), 2, ghosts[i].base_color)
 
             pellets_list.draw()
             player1.draw()
@@ -322,5 +333,30 @@ class GameState:
             back_b.draw()
             mirror_b.draw()
             dij_b.draw()
+            bf_b.draw()
             prim_b.draw()
             kruskal_b.draw()
+
+            ghost1_b.draw()
+            draw_ghost = utils.pick_ghost(ghosts_id[0], 0)
+            draw_ghost.posX = ghost1_b.posx
+            draw_ghost.posY = ghost1_b.posy-20
+            draw_ghost.draw()
+
+            ghost2_b.draw()
+            draw_ghost = utils.pick_ghost(ghosts_id[1], 0)
+            draw_ghost.posX = ghost2_b.posx
+            draw_ghost.posY = ghost2_b.posy-20
+            draw_ghost.draw()
+
+            ghost3_b.draw()
+            draw_ghost = utils.pick_ghost(ghosts_id[2], 0)
+            draw_ghost.posX = ghost3_b.posx
+            draw_ghost.posY = ghost3_b.posy-20
+            draw_ghost.draw()
+
+            ghost4_b.draw()
+            draw_ghost = utils.pick_ghost(ghosts_id[3], 0)
+            draw_ghost.posX = ghost4_b.posx
+            draw_ghost.posY = ghost4_b.posy-20
+            draw_ghost.draw()
