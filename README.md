@@ -29,6 +29,13 @@ O Paku-Paku 2 é a evolução do Paku-Paku. Agora existem novos desafios e dific
 
 ## Screenshots
 
+![](https://i.imgur.com/1guR11m.gif)
+![](https://i.imgur.com/1gSXT6l.png)
+![](https://i.imgur.com/FPYvtrM.png)
+![](https://i.imgur.com/GezBm8X.png)
+![](https://i.imgur.com/d3f4BLT.png)
+![](https://i.imgur.com/RFYafQp.png)
+
 ## Vídeo
 
 [![](---)](---)
@@ -51,3 +58,6 @@ O Paku-Paku 2 é a evolução do Paku-Paku. Agora existem novos desafios e dific
     $ python3 game.py
 
 ## Uso 
+
+    Após instalar e executar basta clicar nos botao jogar para começar e usar as teclas de seta ou WASD para movimentar o personagem
+    Caso queira mais detalhes veja a nossa wiki 

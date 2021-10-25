@@ -58,6 +58,7 @@ class RunState(GameState):
 
     def draw(self):
         super().draw()
+        pyxel.cls(1)
         utils.draw_grid()
 
         for i in range(0, len(utils.edges)):

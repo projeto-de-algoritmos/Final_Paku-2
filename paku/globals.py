@@ -19,10 +19,10 @@ ghosts_id = [0, 1, 2, 4]
 pellets_list = pellets.Pellets()
 
 # BOTOES MENU
-start_b = PlayButton(WIDTH/2, HEIGHT/2, "Jogar")
+start_b = PlayButton(WIDTH/2, HEIGHT/2, "JOGAR!")
 
-records_b = CircleButton(WIDTH/4-20, HEIGHT/2, "Recordes")
-settings_b = CircleButton(WIDTH/2+WIDTH/4+20, HEIGHT/2, "Ajustes")
+records_b = CircleButton(WIDTH/4-20, HEIGHT/2, "RECORDES")
+settings_b = CircleButton(WIDTH/2+WIDTH/4+20, HEIGHT/2, "AJUSTES")
 
 # BOTOES AJUSTES
 mirror_b = CircleButton(WIDTH/4, HEIGHT/2, "Espelhar Labirinto", 12)
