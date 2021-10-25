@@ -1,0 +1,8 @@
+site_name: Paku Paku - wiki
+
+theme:
+  name: material
+  favicon: paku.png
+  logo: paku.png
+  palette:
+    primary: yellow
