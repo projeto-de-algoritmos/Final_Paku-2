@@ -114,13 +114,9 @@ def get_close_node(node: graph.Node, direction):
     return bro_node.get_id()
 
 def cave_paint(current, bro):
-    # print(current)
-    # print(bro)
+
     current_pos = coord_int(current)
     bro_pos = coord_int(bro)
-
-    # print(current_pos)
-    # print(bro_pos)
 
     x1 = current_pos[0]*15+1
     y1 = current_pos[1]*15+1
@@ -135,8 +131,6 @@ def cave_paint(current, bro):
         y1 += 14
 
     rect_custom(x1, y1, x2, y2, 0)
-
-
 
 def mirror():
 
@@ -175,14 +169,7 @@ def mirror():
 
     for j in range(0, GRID_HEIGHT):
         posx = GRID_WIDTH//2
-        # dead_end = 0
 
-        # if (coord_str(posx, j), coord_str(posx+1, j)) not in edges and (coord_str(posx+1, j), coord_str(posx, j)) not in edges: dead_end +=1
-        # if (coord_str(posx, j), coord_str(posx-1, j)) not in edges and (coord_str(posx-1, j), coord_str(posx, j)) not in edges: dead_end +=1
-        # if (coord_str(posx, j), coord_str(posx, j+1)) not in edges and (coord_str(posx, j+1), coord_str(posx, j)) not in edges: dead_end +=1
-        # if (coord_str(posx, j), coord_str(posx, j-1)) not in edges and (coord_str(posx, j-1), coord_str(posx, j)) not in edges: dead_end +=1
-
-        # if dead_end >= 3:
         if j!= GRID_HEIGHT-1:
             if (coord_str(posx, j), coord_str(posx, j+1)) not in edges: 
                 edges.append((coord_str(posx, j), coord_str(posx, j+1)))

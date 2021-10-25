@@ -62,12 +62,10 @@ class Pinky(Ghost):
                 ghost_pos[0] -= 1
                 
             dist = (target[0] - ghost_pos[0])**2 + (target[1] - ghost_pos[1])**2
-            # print(f"dir: {dir} - dist: {dist}")
             if min > dist:
                 min = dist
                 go_to = dir
-
-        # self.turn(dir)                
+             
         return go_to
 
     def reset(self, x, y):

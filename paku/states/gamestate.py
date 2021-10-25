@@ -4,6 +4,7 @@ import player
 import pellets
 from buttons import PlayButton, CircleButton, ExitButton
 
+from ghosts.bordy import Bordy
 from ghosts.blinky import Blinky 
 from ghosts.clyde import Clyde
 from ghosts.pinky import Pinky
@@ -15,7 +16,8 @@ import random
 
 player1 = player.Player()
 ghosts = []
-ghosts.append(Blinky(0, 0))
+# ghosts.append(Blinky(0, 0))
+ghosts.append(Bordy(0, 0))
 ghosts.append(Inky(0, utils.GRID_HEIGHT-1))
 ghosts.append(Pinky(utils.GRID_WIDTH-1, 0))
 ghosts.append(Clyde(utils.GRID_WIDTH-1, utils.GRID_HEIGHT-1))
@@ -87,8 +89,8 @@ class GameState:
             utils.g.reset()
             utils.path.reset()
             utils.edges = []
-            utils.delay = 0
-            # utils.delay = 220
+            # utils.delay = 0
+            utils.delay = 220
 
             for i in range(0, utils.GRID_WIDTH):
                 for j in range(0, utils.GRID_HEIGHT):
@@ -105,11 +107,8 @@ class GameState:
                     if(j != utils.GRID_HEIGHT-1):
                         utils.g.add_edge(utils.coord_str(i, j), utils.coord_str(i, j+1), random.randint(1, 20))
 
-            # if menu var ...
             start = utils.coord_str(random.randint(0, utils.GRID_WIDTH-1), random.randint(0, utils.GRID_HEIGHT-1))
             utils.path, utils.edges = prim.prim_maze(utils.g, start, utils.edges)
-
-            # utils.path, utils.edges = utils.mirror(utils.path, utils.edges)
 
             if mirror_b.is_on:
                 utils.path = utils.mirror()
@@ -154,9 +153,7 @@ class GameState:
 
             # PLAYER GHOST COLISÃO
             for ghost in ghosts:
-                # print(ghost.atNode.get_id())
                 if utils.col_player_ghost(player1.posX, player1.posY, ghost.posX, ghost.posY):
-                # if player1.atNode.get_id() == ghost.atNode.get_id():
                     if ghost.state == "chase" and player1.isAlive:
                         player1.kill_player()
                         pyxel.playm(1, loop=False)
@@ -170,7 +167,6 @@ class GameState:
                 self.state = "win"
 
             if not player1.isAlive and pyxel.frame_count % player1.death_animation >= 70:
-                # utils.register_record(player1.points, self.timer)
                 self.state = "game_over"
 
         elif(self.state == "win" or self.state == "game_over"):
@@ -234,7 +230,6 @@ class GameState:
             for i in range(0, len(utils.edges)):
                 utils.cave_paint(utils.edges[i][0], utils.edges[i][1])
             
-            # pyxel.text(10, utils.HEIGHT-10, """Pressione "P" remover o som de Paku""", 7)
             pyxel.text(20, utils.HEIGHT-10,  f"TEMPO: {(self.timer//60):02d}:{(self.timer%60):02d}", 7)
             pyxel.text(utils.WIDTH-60, utils.HEIGHT-10, f'PONTOS: {player1.points}', 7)
 
@@ -264,7 +259,6 @@ class GameState:
             pyxel.cls(0)
             text_score = f'PONTOS: {player1.points}'
             text_gameOver = 'GAME OVER'
-            # pyxel.text(utils.x_fix(utils.WIDTH/2, txt)-1, utils.HEIGHT/2+70-1, txt, outline_col)
             pyxel.text(utils.align_text(utils.WIDTH/2, text_score) -1, utils.HEIGHT/2, text_score, 7)
             pyxel.text(utils.align_text(utils.WIDTH/2, text_gameOver),utils.HEIGHT/2-20, text_gameOver, 7)
             restart_b.draw()
@@ -272,7 +266,7 @@ class GameState:
         
         # records screen
         elif self.state == "records":
-            #|--|#|NOME|PONTOS|TMEPO|--|
+            #|--|#|NOME|PONTOS|TEMPO|--|
             pyxel.cls(0)
             lst_records = []
             back_b.draw()

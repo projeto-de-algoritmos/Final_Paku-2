@@ -1,12 +1,14 @@
 from ghosts.ghost import Ghost
 import utils
-import heapq
 
-class Blinky(Ghost):
+import random
+
+# Bellman Ford Ghost
+class Bordy(Ghost):
     def __init__(self, x, y) -> None:
         super().__init__(x, y)
-        self.color = 8
-        self.base_color = 8
+        self.color = 2
+        self.base_color = 2
         self.facing = "right"
         self.ghost_path = []
 
@@ -18,7 +20,7 @@ class Blinky(Ghost):
         
         if (self.posX+7)%15 == 0 and (self.posY+7)%15 == 0:
             self.canTurn = True
-            self.calc_target_dijkstra(player_node)
+            self.calc_target_bellman(player_node)
         else:
             self.canTurn = False
 
@@ -26,8 +28,8 @@ class Blinky(Ghost):
             if self.ghost_path != []:
 
                 dir = self.facing
-                
-                next_node = utils.coord_int(self.ghost_path[-1])
+
+                next_node = utils.coord_int(self.ghost_path[0])
                 ghost_node = utils.coord_int(self.atNode.get_id())
                 if ghost_node[0] > next_node[0]:
                         dir = "left"
@@ -39,6 +41,8 @@ class Blinky(Ghost):
                         dir = "down"
             
                 if self.state == "chase":
+
+
                     if dir in self.directions():
                         self.turn(dir)
                     else:
@@ -46,6 +50,7 @@ class Blinky(Ghost):
 
                 elif self.state == "frightened":
                     dir = utils.inv_dir(dir)
+
                     
                     if dir in self.directions():
                         self.turn(dir)
@@ -58,46 +63,40 @@ class Blinky(Ghost):
         if self.state != "eaten":
             self.move()
 
-    # Dijkstra
-    def calc_target_dijkstra(self, player_node):
+    # Bellman Ford
+    def calc_target_bellman (self, player_node):
+        dist = {}
+        edges = []
 
-        visited = [] # Nós visitados
-        end = player_node.get_id()
-        current = self.atNode.get_id()
-        pq  = []
-        nodeData = {}
-        for x in utils.path.get_nodes():
-            nodeData[x] = {'weight': float('inf'), 'parent': []}
-        
-        nodeData[current]['weight'] = 0
-        while len(visited)+1 < utils.path.num_nodes:
-            if current not in visited:
-                visited.append(current)
-                node_dij = utils.path.get_node(current)
-                for neighbour in node_dij.get_bros():
-                    neighbour = neighbour.get_id()
+        g = utils.path
 
-                    if neighbour not in visited:
-                        weight = nodeData[current]['weight'] + 1
-                        if weight < nodeData[neighbour]['weight']:
-                            nodeData[neighbour]['weight'] = weight
-                            nodeData[neighbour]['parent'] = current
+        for node in g:
+            dist.update({node.get_id(): float("Inf")})
+            for bro in node.get_bros():
+                edges.append([node.get_id(), bro.get_id(), random.randint(1,10)])
 
-                        heapq.heappush(pq, (nodeData[neighbour]['weight'], neighbour))
-                heapq.heapify(pq)
+        dist.update({player_node.get_id(): 0})
 
-            if pq == []: break
-            _, current = heapq.heappop(pq)
-            
-        x = end
+        path = {}
+        for _ in range(g.num_nodes - 1):
+            for u, v, w in edges:
+                if dist[u] != float("Inf") and dist[u] + w < dist[v]:
+                    dist[v] = dist[u] + w
+                    path.update({v:u})
+    
         self.ghost_path = []
-        while x != self.atNode.get_id():
-            self.ghost_path.append(x)
-            x = nodeData[x]['parent']
+        current = self.atNode.get_id()
+
+        while current != player_node.get_id():
+            self.ghost_path.append(path[current])
+            current = path[current]
+
+        print("GHOST PATH")
+        print(self.ghost_path)
 
     def reset(self, x, y):
         super().reset(x, y)
-        self.color = 8
-        self.base_color = 8
+        self.color = 2
+        self.base_color = 2
         self.facing = "right"
         self.ghost_path = []

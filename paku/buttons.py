@@ -58,7 +58,7 @@ class CircleButton(Button):
         if self.is_on: txt_color = 8
         else: txt_color = 7
         if self.textCenter:
-            pyxel.text(align_text(self.posx, self.text), self.posy-self.offset, self.text, txt_color)
+            pyxel.text(align_text(self.posx, self.text), self.posy-self.offset-2, self.text, txt_color)
         else:
             pyxel.text(align_text(self.posx, self.text), self.posy+self.radius+3, self.text, txt_color)
 
@@ -91,15 +91,6 @@ class RectButton(Button):
     def draw(self):
         pyxel.rect(self.posx-(self.width/2)-self.offset, self.posy-(self.height/2)-self.offset, self.width+self.offset, self.height+self.offset, self.subcolor)
         pyxel.rect(self.posx-(self.width/2)-self.offset, self.posy-(self.height/2)-self.offset, self.width, self.height, self.color)
-
-        # PIXELS MANUAIS PARA MELHORAR A PERSPECTIVA
-        # pyxel.pset(self.posx-(self.width/2)-self.offset, self.posy+(self.height/2)-1,   0)
-        # pyxel.pset(self.posx-(self.width/2)-self.offset+1, self.posy+(self.height/2)-1, 0)
-        # pyxel.pset(self.posx-(self.width/2)-self.offset, self.posy+(self.height/2)-2,   0)
-
-        # pyxel.pset(self.posx+(self.width/2)-1, self.posy-(self.height/2)-self.offset,   0)
-        # pyxel.pset(self.posx+(self.width/2)-2, self.posy-(self.height/2)-self.offset,   0)
-        # pyxel.pset(self.posx+(self.width/2)-1, self.posy-(self.height/2)-self.offset+1, 0)
 
         if self.is_on: txt_color = 8
         else: txt_color = 7

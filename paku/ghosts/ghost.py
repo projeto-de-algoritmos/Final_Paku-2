@@ -4,12 +4,6 @@ import utils
 import time
 import pyxel
 import random
-import heapq
-
-# Scatter WONT DO
-# Chase
-# Frightened
-# Eaten
 
 class Ghost(Entity):
     def __init__(self, x, y) -> None:
@@ -33,27 +27,36 @@ class Ghost(Entity):
                 self.change_state("chase")
       
     def draw(self):
+
         if self.state != "eaten":
+            # CORPO
             pyxel.circ(self.posX, self.posY, 4, self.color)
             utils.rect_custom(self.posX-4, self.posY, self.posX+5, self.posY+5, self.color)
 
+            # PERNINHAS
             if pyxel.frame_count%30 >= 15:
+                if self.state == "frightened" and round(time.time()) - self.countdown >= 10:
+                    self.color = self.base_color
                 pyxel.pset(self.posX-4, self.posY+5, self.color)
                 pyxel.pset(self.posX-2, self.posY+5, self.color)
                 pyxel.pset(self.posX, self.posY+5, self.color)
                 pyxel.pset(self.posX+2, self.posY+5, self.color)
                 pyxel.pset(self.posX+4, self.posY+5, self.color)
             else:
+                if self.state == "frightened" and round(time.time()) - self.countdown >= 10:
+                    self.color = 12
                 pyxel.pset(self.posX-3, self.posY+5, self.color)
                 pyxel.pset(self.posX-1, self.posY+5, self.color)
                 pyxel.pset(self.posX+1, self.posY+5, self.color)
                 pyxel.pset(self.posX+3, self.posY+5, self.color)
-
-
+        
+        # OLHOS
         pyxel.circ(self.posX-2, self.posY-1, 1, 7)
         pyxel.circ(self.posX+2, self.posY-1, 1, 7)
         pyxel.pset(self.posX-2, self.posY-1, 0)
         pyxel.pset(self.posX+2, self.posY-1, 0)
+        
+        
     
     def random_move(self):
         dir = self.directions()
@@ -80,8 +83,6 @@ class Ghost(Entity):
             self.posY = self.home[1]
             self.color = 0
             self.countdown = round(time.time())
-
-            # self.countdown = pyxel.frame_count()
             
     def reset(self, x, y):
         self.state = "chase"
@@ -92,5 +93,3 @@ class Ghost(Entity):
         self.color = 0
         self.base_color = 0
         self.countdown = 0                    
-
-

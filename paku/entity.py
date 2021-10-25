@@ -41,7 +41,6 @@ class Entity:
 
     def turn(self, direction):
         if self.canTurn == True:
-            # if self.check_move:
             close_node = utils.get_close_node(self.atNode, direction)
             if (self.atNode.get_id(), close_node) in utils.edges or (close_node, self.atNode.get_id()) in utils.edges :
                 self.facing = direction
