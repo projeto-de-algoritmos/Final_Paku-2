@@ -19,5 +19,4 @@ class Game:
     def draw(self):
         globals.current_state.draw()        
 
-        
 Game()

@@ -27,6 +27,7 @@ class Button:
         self.color = 0
         self.subcolor = 0
         self.textCenter = False
+        self.description = ""
 
     def update(self):
         """Atualiza o estado do botão"""
@@ -39,8 +40,8 @@ class Button:
 class CircleButton(Button):
     def __init__(self, x, y, text, r=15, textCenter=False):
         super().__init__(x, y, text, )
-        self.color = 12
-        self.subcolor = 5
+        self.color = 10
+        self.subcolor = 9
         self.radius = r
         self.textCenter = textCenter
         
@@ -132,7 +133,8 @@ class PushButton(Button):
         pyxel.circ(self.posx, self.posy, self.radius, 5)
         pyxel.circ(self.posx, self.posy-self.offset, self.radius, 12)
         
-        pyxel.text(align_text(self.posx+1, self.text), self.posy-self.offset-1, self.text, 7)
+        # pyxel.text(align_text(self.posx+1, self.text), self.posy-self.offset-1, self.text, 7)
+        pyxel.text(align_text(self.posx, self.text), self.posy+self.radius+3, self.text, 7)
 
 class PlayButton(CircleButton):
     def __init__(self, x, y, text, ):
@@ -143,7 +145,30 @@ class PlayButton(CircleButton):
         pyxel.circ(self.posx,  self.posy, self.radius, 9) # Sombra
         pyxel.circ(self.posx,  self.posy-self.offset, self.radius, 10)
         pyxel.circ(self.posx,  self.posy-15-self.offset, 3, 0)
-        pyxel.tri(self.posx, self.posy, self.posx+30, self.posy-20, self.posx+30, self.posy+20, 0)
+        pyxel.pset(self.posx, self.posy, 10)
+
+        tmp_color = 9
+        if self.offset == 0: tmp_color = 0
+
+        pos1 = [-1, -3]
+        pos2 = [3, 2]
+        pos3 = [25, -21]
+        pos4 = [22, 10]
+
+        # parte escura abaixo da boca
+        pyxel.tri( self.posx+pos1[0], self.posy+4-self.offset+pos1[1], self.posx+pos2[0], self.posy+4-self.offset+pos2[1], self.posx+pos3[0], self.posy+4-self.offset+pos3[1], tmp_color)
+        pyxel.tri( self.posx+pos4[0], self.posy+4-self.offset+pos4[1], self.posx+pos2[0], self.posy+4-self.offset+pos2[1], self.posx+pos3[0], self.posy+4-self.offset+pos3[1], tmp_color)
+        
+        # abertura da boca
+        pyxel.tri(self.posx, self.posy+4-self.offset, self.posx+30, self.posy-20+4-self.offset, self.posx+30, self.posy+20+4-self.offset, 0)
+
+        # pequenas correcoes
+        pyxel.pset(self.posx+pos1[0], self.posy+4-self.offset+pos1[1], 10)
+        pyxel.pset(self.posx+pos1[0]+1, self.posy+4-self.offset+pos1[1]+2, tmp_color)
+
+        # correcoes das pontas da boca
+        pyxel.rect(self.posx+23, self.posy+15, 10, 10, 0)
+        pyxel.rect(self.posx+24, self.posy-24, 10, 18, 0)
 
         pyxel.text(align_text(self.posx, self.text), self.posy+40, self.text, 7)
 

@@ -10,6 +10,7 @@ from states.gamestate import GameState
 class GameOverState(GameState):
     def __init__(self) -> None:
         super().__init__()
+        self.title_text=""
 
 
     def update(self):
@@ -27,8 +28,8 @@ class GameOverState(GameState):
     def draw(self):
         super().draw()
         text_score = f'PONTOS: {player1.points}'
-        text_gameOver = 'GAME OVER'
+        self.title_text = 'GAME OVER'
         pyxel.text(utils.align_text(utils.WIDTH/2, text_score) -1, utils.HEIGHT/2, text_score, 7)
-        pyxel.text(utils.align_text(utils.WIDTH/2, text_gameOver),utils.HEIGHT/2-20, text_gameOver, 7)
+        pyxel.text(utils.align_text(utils.WIDTH/2, self.title_text),utils.HEIGHT/2-20, self.title_text, 7)
         restart_b.draw()
         exit_b.draw()

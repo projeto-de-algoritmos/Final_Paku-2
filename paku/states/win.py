@@ -13,5 +13,6 @@ class WinState(GameOverState):
 
     def draw(self):
         super().draw()
-        text_win = 'PARABENS!'
-        pyxel.text(utils.align_text(utils.WIDTH/2, text_win),utils.HEIGHT/2-40, text_win, 7)
+        self.title_text = 'PARABENS!'
+        pyxel.rect(utils.WIDTH/2-25, utils.HEIGHT/2-25, 50, 15, 0)
+        pyxel.text(utils.align_text(utils.WIDTH/2, self.title_text),utils.HEIGHT/2-20, self.title_text, 7)

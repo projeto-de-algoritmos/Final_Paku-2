@@ -24,9 +24,6 @@ class RunState(GameState):
                 ghosts[i].friend_pos = [ghosts[(i+1)%4].posX, ghosts[(i+1)%4].posY]
             ghosts[i].update(player1.atNode, player1.facing)
 
-        if pyxel.btnp(pyxel.KEY_P):
-            pyxel.stop()
-
         # PLAYER PELLET COLISÃO
         player_pos = utils.get_pos_in_grid(player1.posX, player1.posY)
         pellet = pellets_list.pellets_dict.get(player_pos)

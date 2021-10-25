@@ -16,8 +16,8 @@ import pyxel
 from math import dist
 import os
 
-WIDTH = 256
-HEIGHT = 196
+WIDTH = globals.WIDTH
+HEIGHT = globals.HEIGHT
 GRID_WIDTH = 17
 GRID_HEIGHT = 12
 
@@ -25,6 +25,12 @@ g = graph.Graph()
 path = graph.Graph()
 edges = []
 delay = 220
+
+def get_width():
+    return WIDTH
+
+def get_height():
+    return HEIGHT
 
 def change_state():
     # print(globals.next_state)
@@ -133,6 +139,29 @@ def coord_str(x, y):
 def coord_int(coord):
     st = coord.split("-")
     return [int(st[0]), int(st[1])]
+
+def pick_ghost_info(id):
+
+    name = ""
+    description = ""
+
+    if id == 0:
+        name = "BLINKY"
+        description = "Blinky persegue o jogador\nusando o algortimo de\nDijkstra"
+    elif id == 1:
+        name = "INKY"
+        description = "Inky tenta se unir a outro\nfantasma para emboscar Paku"
+    elif id == 2:
+        name = "PINKY"
+        description = "Pinky tenta estar sempre\num passo a frente de Paku\npara surpreende-lo"
+    elif id == 3:
+        name = "CLYDE"
+        description = "Clyde nao sabe muito bem\npor onde ir"
+    elif id == 4:
+        name = "BORDY"
+        description = "Bordy persegue o jogador\nusando o algortimo de\nBellman-Ford"
+
+    return name, description
 
 def pick_ghost(id, pos_id):
     
