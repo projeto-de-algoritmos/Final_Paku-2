@@ -14,6 +14,7 @@ from states.win import WinState
 
 import pyxel
 from math import dist
+import os
 
 WIDTH = 256
 HEIGHT = 196
@@ -256,22 +257,25 @@ def mirror():
 
 
 def register_record(name, points, time):
-    file = open("paku/paku_records.txt", "a")
+    file_name = ".paku_records.txt"
+    file = open(file_name, "a")
 
     file.write(f"{name} {points} {time}\n")
     file.close()
 
 def get_records():
     records = []
-    file = open("paku/paku_records.txt", "r")
-    
-    lines = file.readlines()
+    file_name = ".paku_records.txt"
 
-    for line in lines:
-        name, points, time = line.strip().split(" ")
-        records.append([name, points, time])
+    if os.path.exists(file_name):
+        file = open(file_name, "r")
+        lines = file.readlines()
 
-    file.close()
+        for line in lines:
+            name, points, time = line.strip().split(" ")
+            records.append([name, int(points), int(time)])
+
+        file.close()
 
     return records
 
@@ -280,24 +284,22 @@ def mergeSort(lst):
     if len(lst) > 1:
         mid = len(lst)//2
   
-        i = j = k = 0
         left = lst[:mid]
         right = lst[mid:]
         mergeSort(left)
         mergeSort(right)
-  
+        i = j = k = 0 
         while i < len(left) and j < len(right):
-            if left[i][1] >= right[j][1]:
-                if left[i][1] == right[j][1]:
-                    if  left[i][2] < right[j][2]:
+            if left[i][1] > right[j][1]:
+                    lst[k] = left[i]
+                    i += 1
+            elif left[i][1] == right[j][1]:
+                    if  left[i][2] <= right[j][2]:
                         lst[k] = left[i]
                         i += 1
                     else:
                         lst[k] = right[j]
                         j += 1
-                else:
-                    lst[k] = left[i]
-                    i += 1
             else:
                 lst[k] = right[j]
                 j += 1
@@ -312,5 +314,5 @@ def mergeSort(lst):
             lst[k] = right[j]
             j += 1
             k += 1
-    # print(lst)
+            
     return lst
