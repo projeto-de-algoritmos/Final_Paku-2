@@ -15,7 +15,6 @@ def buildTree(edges):
 
 
 def breakWalls(path: Graph, edges):
-    print(path.node_dict)
     for i in range(0, utils.GRID_WIDTH):
         for j in range(0, utils.GRID_HEIGHT):
             node = path.node_dict[utils.coord_str(i, j)]
@@ -78,13 +77,12 @@ def union(parent, rank, x, y):
         parent[yroot] = xroot
         rank[xroot] += 1
 
-def kruskal(graph, edges):
+def kruskal_maze(graph, edges):
     path = Graph()
     i, e = 0, 0
     parent = {}
-    # edges = []
-    #Todas as edges
     lst_edges = []
+
     for node in graph:
         parent[node.get_id()] = node.get_id()
         for bro in node.get_bros():

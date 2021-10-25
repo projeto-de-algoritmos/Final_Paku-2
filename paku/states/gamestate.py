@@ -1,8 +1,10 @@
+from kruskal import kruskal
 import utils
 import prim
 import player
 import pellets
 from buttons import PlayButton, CircleButton, ExitButton
+import kruskal
 
 from ghosts.bordy import Bordy
 from ghosts.blinky import Blinky 
@@ -38,6 +40,10 @@ settings_b = CircleButton(utils.WIDTH/2+utils.WIDTH/4+20, utils.HEIGHT/2, "Ajust
 # BOTOES AJUSTES
 mirror_b = CircleButton(utils.WIDTH/4-20, utils.HEIGHT/4, "Espelhar Labirinto")
 dij_b = CircleButton(utils.WIDTH/2+utils.WIDTH/4+20, utils.HEIGHT/4, "Mostrar Dijkstra")
+kruskal_b = CircleButton(utils.WIDTH/4-20, 3*(utils.HEIGHT/4), "kruskal")
+prim_b = CircleButton(utils.WIDTH/2+utils.WIDTH/4+20, 3*(utils.HEIGHT/4), "Prim")
+# Prim como ON
+prim_b.is_on = True
 
 back_b = CircleButton(15, 15, "<", 5, textCenter=True)
 
@@ -89,8 +95,8 @@ class GameState:
             utils.g.reset()
             utils.path.reset()
             utils.edges = []
-            # utils.delay = 0
-            utils.delay = 220
+            utils.delay = 0
+            # utils.delay = 220
 
             for i in range(0, utils.GRID_WIDTH):
                 for j in range(0, utils.GRID_HEIGHT):
@@ -109,18 +115,20 @@ class GameState:
 
             # edges = Lista de arestas (string)
             # path  = Objeto Grafo com as conexões presentes no labirinto
-            start = utils.coord_str(random.randint(0, utils.GRID_WIDTH-1), random.randint(0, utils.GRID_HEIGHT-1))
-            utils.path, utils.edges = prim.prim_maze(utils.g, start, utils.edges)
-
-            # print(utils.edges)
+            if prim_b.is_on:
+                start = utils.coord_str(random.randint(0, utils.GRID_WIDTH-1), random.randint(0, utils.GRID_HEIGHT-1))
+                utils.path, utils.edges = prim.prim_maze(utils.g, start, utils.edges)
+            else:
+                utils.path, utils.edges = kruskal.kruskal(utils.g, utils.edges)
 
             if mirror_b.is_on:
                 utils.path = utils.mirror()
                 mirror_b.is_on = False
 
-            self.state = "prim"
-                
-        elif(self.state == "prim"):
+            self.state = "maze"
+
+
+        elif(self.state == "maze"):
 
             if(utils.delay!=len(utils.edges)-1):
                 utils.delay += 1
@@ -191,9 +199,22 @@ class GameState:
                 self.state = "menu"
         
         elif self.state == "settings":
+            #Prim inicia como ligado
+            last_kruskal = kruskal_b.is_on
+            last_prim = prim_b.is_on
+
             back_b.update()
             mirror_b.update()
             dij_b.update()
+            prim_b.update()
+            kruskal_b.update()
+
+            # kruskal_b.is_on = not prim_b.is_on
+            if kruskal_b.is_on != last_kruskal:
+                prim_b.is_on = last_kruskal
+
+            if prim_b.is_on != last_prim:
+                kruskal_b.is_on = last_prim
 
             if back_b.is_on:
                 back_b.is_on = False
@@ -213,7 +234,7 @@ class GameState:
         elif(self.state == "start"):
             utils.draw_grid()
             
-        elif(self.state == "prim"):
+        elif(self.state == "maze"):
             utils.draw_grid()
 
             if utils.edges != []:
@@ -225,7 +246,6 @@ class GameState:
 
             for ghost in ghosts:
                 ghost.draw()
-
 
             
         elif(self.state == "run"):
@@ -302,3 +322,5 @@ class GameState:
             back_b.draw()
             mirror_b.draw()
             dij_b.draw()
+            prim_b.draw()
+            kruskal_b.draw()
