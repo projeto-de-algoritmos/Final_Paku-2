@@ -1,7 +1,20 @@
-from utils import align_text, col_mouse_bt
+# from utils import align_text, col_mouse_bt
 
 from math import dist
 import pyxel
+
+def align_text(x, str):
+    n = len(str)
+    return (x - (n * pyxel.FONT_WIDTH) / 2)
+
+def col_mouse_bt(mx, my, btx, bty, btw, bth):
+    """
+        Verifica o clique no botão
+    """
+    if (btx+(btw/2) > mx > btx-(btw/2)) and (bty+(bth/2) > my > bty-(bth/2)-4):
+        return True
+    else:
+        return False
 
 class Button:
 

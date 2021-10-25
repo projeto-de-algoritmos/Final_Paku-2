@@ -1,4 +1,5 @@
 import utils 
+import globals
 import states.gamestate as gs
 
 import pyxel
@@ -8,16 +9,16 @@ class Game:
         pyxel.init(utils.WIDTH, utils.HEIGHT, caption="PAKU PAKU 2", fps=30)
         pyxel.mouse(True)       
         pyxel.load("assets.pyxres")
-
-        self.gamestate = gs.GameState()
-        self.gamestate.state = "menu"
-
+        
         pyxel.run(self.update, self.draw)
 
     def update(self):
-        self.gamestate.update()
+        globals.current_state.update()
+
+        utils.change_state()
 
     def draw(self):
-        self.gamestate.draw()        
+        globals.current_state.draw()        
+
         
 Game()

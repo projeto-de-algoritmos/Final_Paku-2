@@ -1,13 +1,16 @@
 import graph
+import globals 
 
-# import ghosts.ghost
-# import ghosts.blinky
-# import ghosts.
-# import ghosts.
-# import ghosts.
-# import ghosts.
+from ghosts import blinky, bordy, inky, pinky, clyde
 
-from ghosts import ghost, blinky, bordy, inky, pinky, clyde
+from states.game_over import GameOverState
+from states.maze import MazeState
+from states.menu import MenuState
+from states.records import RecordsState
+from states.run import RunState
+from states.settings import SettingsState
+from states.start import StartState
+from states.win import WinState
 
 import pyxel
 from math import dist
@@ -21,6 +24,37 @@ g = graph.Graph()
 path = graph.Graph()
 edges = []
 delay = 220
+
+def change_state():
+    # print(globals.next_state)
+    if globals.next_state != "":
+
+
+        if globals.next_state == "game_over":
+            globals.current_state = GameOverState()
+
+        elif globals.next_state == "maze":
+            globals.current_state = MazeState()
+
+        elif globals.next_state == "menu":
+            globals.current_state = MenuState()
+
+        elif globals.next_state == "records":
+            globals.current_state = RecordsState()
+
+        elif globals.next_state == "run":
+            globals.current_state = RunState()
+
+        elif globals.next_state == "settings":
+            globals.current_state = SettingsState()
+
+        elif globals.next_state == "start":
+            globals.current_state = StartState()
+
+        elif globals.next_state == "win":
+            globals.current_state = WinState()
+
+        globals.next_state = ""
 
 def align_text(x, str):
     n = len(str)
