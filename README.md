@@ -59,5 +59,6 @@ O Paku-Paku 2 é a evolução do Paku-Paku. Agora existem novos desafios e dific
 
 ## Uso 
 
-    Após instalar e executar basta clicar nos botao jogar para começar e usar as teclas de seta ou WASD para movimentar o personagem
-    Caso queira mais detalhes veja a nossa wiki 
+Após instalar e executar basta clicar no botão jogar para começar o jogo e então usar as teclas de seta ou WASD para movimentar o personagem  
+
+Caso queira mais detalhes veja a nossa wiki 
