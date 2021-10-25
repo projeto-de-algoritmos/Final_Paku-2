@@ -44,7 +44,9 @@ ghost2_b = PushButton(gx+(30*1), HEIGHT-28, "Ghost 2", 8)
 ghost3_b = PushButton(gx+(30*2), HEIGHT-28, "Ghost 3", 8)
 ghost4_b = PushButton(gx+(30*3), HEIGHT-28, "Ghost 4", 8)
 
-back_b = CircleButton(15, 15, "<", 5, textCenter=True)
+back_b = PushButton(15, 15, "<", 5, textCenter=True)
+back_b.color = 10
+back_b.subcolor = 9
 
 # BOTOES GAME OVER
 restart_b = PlayButton(WIDTH/2-60, HEIGHT/2, "Menu")

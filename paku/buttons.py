@@ -112,10 +112,13 @@ class RectButton(Button):
         pyxel.text(align_text(self.posx, self.text)-self.offset, self.posy-self.offset-2, self.text, txt_color)
 
 class PushButton(Button):
-    def __init__(self, x, y, text, r):
+    def __init__(self, x, y, text, r, textCenter=False):
         super().__init__(x, y, text)
+        self.color = 12
+        self.subcolor = 5
         self.radius = r
         self.offset = 2
+        self.textCenter = textCenter
         
     def update(self):
         mouse_pos = [pyxel.mouse_x, pyxel.mouse_y]
@@ -130,11 +133,15 @@ class PushButton(Button):
             self.offset = 2
 
     def draw(self):
-        pyxel.circ(self.posx, self.posy, self.radius, 5)
-        pyxel.circ(self.posx, self.posy-self.offset, self.radius, 12)
+        pyxel.circ(self.posx, self.posy, self.radius, self.subcolor)
+        pyxel.circ(self.posx, self.posy-self.offset, self.radius, self.color)
         
+        if self.textCenter:
+            pyxel.text(align_text(self.posx, self.text), self.posy-self.offset-2, self.text, 7)
+        else:
+            pyxel.text(align_text(self.posx, self.text), self.posy+self.radius+3, self.text, 7)
         # pyxel.text(align_text(self.posx+1, self.text), self.posy-self.offset-1, self.text, 7)
-        pyxel.text(align_text(self.posx, self.text), self.posy+self.radius+3, self.text, 7)
+        # pyxel.text(align_text(self.posx, self.text), self.posy+self.radius+3, self.text, 7)
 
 class PlayButton(CircleButton):
     def __init__(self, x, y, text, ):

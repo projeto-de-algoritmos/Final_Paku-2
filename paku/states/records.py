@@ -13,10 +13,8 @@ class RecordsState(GameState):
 
     def update(self):
         super().update()
-        back_b.update()
-
-        if back_b.is_on:
-            back_b.is_on = False
+        
+        if back_b.update():
             globals.next_state = "menu"
 
     def draw(self):

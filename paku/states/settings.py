@@ -15,7 +15,7 @@ class SettingsState(GameState):
 
     def update(self):
         super().update()
-        back_b.update()
+        
         mirror_b.update()
         dij_b.update()
         bf_b.update()
@@ -41,8 +41,7 @@ class SettingsState(GameState):
         else:
             prim_b.is_on = True
 
-        if back_b.is_on:
-            back_b.is_on = False
+        if back_b.update():
             globals.next_state = "menu"
 
         
