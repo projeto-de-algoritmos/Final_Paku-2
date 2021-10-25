@@ -25,9 +25,9 @@ settings_b = CircleButton(WIDTH/2+WIDTH/4+20, HEIGHT/2, "Ajustes")
 # BOTOES AJUSTES
 mirror_b = CircleButton(WIDTH/4-20, HEIGHT/4, "Espelhar Labirinto")
 dij_b = CircleButton(WIDTH/2+WIDTH/4+20, HEIGHT/4, "Mostrar Dijkstra")
-bf_b = CircleButton(WIDTH/2, HEIGHT/4, "Mostrar Bellman-Ford")
-kruskal_b = CircleButton(WIDTH/4-20, 3*(HEIGHT/4), "kruskal")
-prim_b = CircleButton(WIDTH/2+WIDTH/4+20, 3*(HEIGHT/4), "Prim")
+bf_b = CircleButton(WIDTH/2, HEIGHT/4+20, "Mostrar Bellman-Ford")
+kruskal_b = CircleButton(WIDTH/4-20, HEIGHT/2+10, "kruskal")
+prim_b = CircleButton(WIDTH/2+WIDTH/4+20, HEIGHT/2+10, "Prim")
 
 ghost1_b = PushButton(80,  HEIGHT-30, "Ghost 1", 10)
 ghost2_b = PushButton(110, HEIGHT-30, "Ghost 2", 10)

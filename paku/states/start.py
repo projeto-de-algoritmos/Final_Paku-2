@@ -30,8 +30,8 @@ class StartState(GameState):
         utils.g.reset()
         utils.path.reset()
         utils.edges = []
-        # utils.delay = 0
-        utils.delay = 220
+        utils.delay = 0
+        # utils.delay = 220
 
         for i in range(0, utils.GRID_WIDTH):
             for j in range(0, utils.GRID_HEIGHT):
