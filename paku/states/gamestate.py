@@ -19,11 +19,6 @@ player1 = player.Player()
 ghosts = []
 ghosts_id = [0, 1, 2, 3]
 
-# ghosts[0].state = "eaten"
-# ghosts[1].state = "eaten"
-# ghosts[2].state = "eaten"
-# ghosts[3].state = "eaten"
-
 pellets_list = pellets.Pellets()
 
 # BOTOES MENU
@@ -93,8 +88,8 @@ class GameState:
             utils.g.reset()
             utils.path.reset()
             utils.edges = []
-            utils.delay = 0
-            # utils.delay = 220
+            # utils.delay = 0
+            utils.delay = 220
 
             for i in range(0, utils.GRID_WIDTH):
                 for j in range(0, utils.GRID_HEIGHT):
@@ -131,7 +126,6 @@ class GameState:
             if(utils.delay!=len(utils.edges)-1):
                 utils.delay += 1
             else:
-                pyxel.playm(2, loop=True)
                 self.state = "run"
 
         elif(self.state == "run"):
@@ -153,6 +147,7 @@ class GameState:
             player_pos = utils.get_pos_in_grid(player1.posX, player1.posY)
             pellet = pellets_list.pellets_dict.get(player_pos)
             if pellet != None:
+                pyxel.playm(2, loop=False)
                 if pellet == 2:
                     player1.points += 40
                     for ghost in ghosts:
@@ -311,7 +306,8 @@ class GameState:
             pos_points = utils.WIDTH/2-10
             pos_time = utils.WIDTH/2+60
             
-            pyxel.text(utils.align_text(utils.WIDTH/2, "RECORDS - TOP 10"), 10, "RECORDS - TOP 10", 7)
+            # print((pyxel.frame_count%43 // 3)+1)
+            pyxel.text(utils.align_text(utils.WIDTH/2, "RECORDS - TOP 10"), 10, "RECORDS - TOP 10", (pyxel.frame_count%40 // 3)+2)
             
             # pyxel.text(pos_id, 30, "", 7)
             pyxel.text(pos_name,   35, "NOME", 7)

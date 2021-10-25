@@ -278,4 +278,5 @@ def mergeSort(lst):
             lst[k] = right[j]
             j += 1
             k += 1
+    # print(lst)
     return lst
