@@ -5,4 +5,5 @@ theme:
   favicon: paku.png
   logo: paku.png
   palette:
-    primary: yellow
+    primary: indigo
+    accent: amber
