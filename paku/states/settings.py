@@ -78,7 +78,7 @@ class SettingsState(GameState):
         pyxel.line(0, utils.HEIGHT//3, utils.WIDTH, utils.HEIGHT//3, 7)
         pyxel.text(3, utils.HEIGHT//3+4, "LABIRINTO:", 7)
         pyxel.line(0, (utils.HEIGHT//3)*2, utils.WIDTH, (utils.HEIGHT//3)*2, 7)
-        pyxel.text(3, (utils.HEIGHT//3)*2+4, "FANSTASMAS:", 7)
+        pyxel.text(3, (utils.HEIGHT//3)*2+4, "FANTASMAS:", 7)
         pyxel.line(utils.WIDTH/2, (utils.HEIGHT//3)*2, utils.WIDTH/2, utils.HEIGHT, 7)
 
         
