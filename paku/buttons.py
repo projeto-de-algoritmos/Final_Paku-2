@@ -189,5 +189,5 @@ class ExitButton(CircleButton):
         pyxel.circ(self.posx,  self.posy-self.offset, self.radius, 10)
         pyxel.circ(self.posx-10,  self.posy-15-self.offset, 3, 0)
         pyxel.circ(self.posx+10,  self.posy-15-self.offset, 3, 0)
-        pyxel.line(self.posx-10, self.posy+10-self.offset, self.posx+10, self.posy+10-self.offset, 0)
+        # pyxel.line(self.posx-10, self.posy+10-self.offset, self.posx+10, self.posy+10-self.offset, 0)
         pyxel.text(align_text(self.posx, self.text), self.posy+40, self.text, 7)
