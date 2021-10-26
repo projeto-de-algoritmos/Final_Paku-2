@@ -25,7 +25,7 @@
         
           
           
-          <meta name="theme-color" content="#ffec3d">
+          <meta name="theme-color" content="#4051b5">
         
       
     
@@ -52,7 +52,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="yellow" data-md-color-accent="">
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="indigo" data-md-color-accent="amber">
       
   
     
@@ -263,8 +263,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#bolhinhas" class="md-nav__link">
-    Bolhinhas
+  <a href="#bolinhas" class="md-nav__link">
+    Bolinhas
   </a>
   
 </li>
@@ -333,13 +333,6 @@
           <li class="md-nav__item">
   <a href="#instalar-e-executar-sistema-baseado-em-debian" class="md-nav__link">
     Instalar e Executar (Sistema baseado em Debian)
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#executar-via-release" class="md-nav__link">
-    Executar via release
   </a>
   
 </li>
@@ -459,8 +452,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#bolhinhas" class="md-nav__link">
-    Bolhinhas
+  <a href="#bolinhas" class="md-nav__link">
+    Bolinhas
   </a>
   
 </li>
@@ -533,13 +526,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#executar-via-release" class="md-nav__link">
-    Executar via release
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -581,12 +567,12 @@
                 <h1 id="paku-paku">Paku-Paku</h1>
 <p>Bem vindo a documentação do <strong>Paku-Paku</strong>. Nessa página você vai conhecer mais sobre o jogo, seus elementos e como jogar.</p>
 <h2 id="sobre-o-jogo">Sobre o jogo</h2>
-<p>O Paku-Paku é um jogo inspirado no Pac-Man. O jogador assume o controle do Paku e o guia pelo labirinto em busca das bolhinhas pra alimentar o faminto Paku. Mas guiar o Paku não é uma tarefa tão simples, o labirinto é um lugar perigoso e cheio de fantasmas que o perseguem, a única esperança do Paku é escapar dos fantasmas ou conseguir alcançar uma super bolinha que lhe da poderes que o tornam capaz de comer os fantasmas, mas isso não resolve o problema pois os fantasmas sempre voltam.</p>
-<p>O <strong>objetivo</strong> do jogo é que o Paku consiga comer o maior número de bolhinhas possíveis sem ser capturado pelos fantasmas. Ao comer as bolhinhas especiais(maiores) o Paku consegue poderes, por 15 segundos, e fica forte o suficiente para comer os fantasmas, sabendo disso os fantasmas começam a fugir do Paku.</p>
+<p>O Paku-Paku é um jogo inspirado no Pac-Man. O jogador assume o controle do Paku e o guia pelo labirinto em busca das bolinhas pra alimentar o faminto Paku. Mas guiar o Paku não é uma tarefa tão simples, o labirinto é um lugar perigoso e cheio de fantasmas que o perseguem, a única esperança do Paku é escapar dos fantasmas ou conseguir alcançar uma super bolinha que lhe da poderes que o tornam capaz de comer os fantasmas, mas isso não resolve o problema pois os fantasmas sempre voltam.</p>
+<p>O <strong>objetivo</strong> do jogo é que o Paku consiga comer o maior número de bolinhas possíveis sem ser capturado pelos fantasmas. Ao comer as bolinhas especiais (maiores) o Paku consegue poderes por 15 segundos, e fica forte o suficiente para comer os fantasmas, sabendo disso os fantasmas começam a fugir do Paku.</p>
 <h2 id="elementos-do-paku-paku">Elementos do Paku-Paku</h2>
 <h3 id="paku">Paku</h3>
 <p><center>
-<img src="https://i.imgur.com/2buxhsD.png"></img>
+<img src="https://i.imgur.com/p0h1DyT.png"></img>
 </center></p>
 <p>O <strong>Paku</strong> é o personagem principal do jogo. O jogador pode mover o Paku para todas as direções desejadas, desde que não haja uma parede na direção.</p>
 <p>O Paku pode ser morto pelos Fantasmas caso seja capturado. Porém ao comer uma super bolinha o Paku ganha poderes, e enquanto os poderes durarem (15 segundos) ele não pode ser morto pelos fantasmas, pelo contrário, ele pode comer eles e ganhar um bônus de 100 pontos. Quando os poderes do Paku começam a se enfraquecer (nos últimos 5 segundos) os fantasmas começam a piscar voltando pra sua forma original.</p>
@@ -595,89 +581,91 @@
 <img src="https://i.imgur.com/Ta8Q1C8.png"></img>
 </center></p>
 <p>O Blinky é um fantasma muito inteligente, ele usa um algoritmo de Dijkstra para perseguir o Paku.</p>
-<p>Sempre que o Paku ganha poderes, ele usa o mesmo algoritmo para tentar fugir, durante 15 segundos.</p>
+<p>Sempre que o Paku ganha poderes, ele usa o mesmo algoritmo para tentar fugir.</p>
 <h3 id="inky">Inky</h3>
 <p><center>
 <img src="https://i.imgur.com/QQioYop.png"></img>
 </center></p>
 <p>O Inky é um fantasma que gosta de trabalhar em equipe, ele tenta se unir a outro fantasma para emboscar Paku.</p>
-<p>Sempre que o Paku ganha poderes, ele tenta fugir(por 15 segundos) correndo pra longe de todos os fantasmas pois acha que ficará mais seguro assim.</p>
+<p>Sempre que o Paku ganha poderes, ele tenta fugir correndo para longe de todos os fantasmas pois acha que ficará mais seguro assim.</p>
 <h3 id="pinky">Pinky</h3>
 <p><center>
 <img src="https://i.imgur.com/vyciGvi.png"></img>
 </center></p>
 <p>O Pinky é um fantasma estrategista, ele tenta estar sempre um passo a frente de Paku para surpreende-lo.</p>
-<p>Sempre que o Paku ganha poderes, ele tenta fugir(por 15 segundos) correndo pro lado contrário que o Paku esta movendo.</p>
+<p>Sempre que o Paku ganha poderes, ele tenta fugir correndo pro lado contrário de onde Paku estiver.</p>
 <h3 id="clyde">Clyde</h3>
 <p><center>
 <img src="https://i.imgur.com/5MtDjms.png"></img>
 </center></p>
 <p>O Clyde é um fantasma atrapalhado e medroso, sempre que é preciso perseguir o Paku ele fica sem saber o que fazer, pois tem medo de se aproximar e morrer.</p>
-<p>Sempre que o Paku ganha poderes, ele tenta fugir(por 15 segundos) correndo desesperado de medo pelo labirinto.</p>
+<p>Sempre que o Paku ganha poderes ele tenta fugir correndo desesperado de medo pelo labirinto.</p>
 <h3 id="bordy">Bordy</h3>
 <p><center>
 <img src="https://i.imgur.com/fwnpvc6.png"></img>
 </center></p>
 <p>O Bordy é um fantasma muito inteligente, ele usa um algoritmo de Bellman-Ford para perseguir o Paku.</p>
-<p>Sempre que o Paku ganha poderes, ele usa o mesmo algoritmo para tentar fugir, durante 15 segundos.</p>
-<h3 id="bolhinhas">Bolhinhas</h3>
+<p>Sempre que o Paku ganha poderes, ele usa o mesmo algoritmo para tentar fugir.</p>
+<h3 id="bolinhas">Bolinhas</h3>
 <p><center>
 <img src="https://i.imgur.com/TEW2Ssu.png"></img>
 </center></p>
-<p>As bolhinhas são capturadas sempre que o Paku passa por elas e geram pontos para o jogador.</p>
-<p>Existem dois tipos de bolhinhas no jogo:
-- <strong>bolhinhas comuns</strong>: valem apenas 10 ponto;
-- <strong>Super bolinhas</strong>: São maiores que as bolinhas comuns e valem 50 pontos e dão ao Paku poder suficiente para comer os fantasmas durante 15 segundos.</p>
+<p>As bolinhas são capturadas sempre que o Paku passa por elas e geram pontos para o jogador.</p>
+<p>Existem dois tipos de bolinhas no jogo:  </p>
+<ul>
+<li><strong>Bolinhas comuns</strong>: valem apenas 10 pontos.</li>
+<li><strong>Super bolinas</strong>: São maiores que as bolinhas comuns e valem 50 pontos e dão ao Paku poder suficiente para comer os fantasmas durante 15 segundos.</li>
+</ul>
 <h3 id="tela-de-menu">Tela de Menu</h3>
 <p><img alt="" src="https://i.imgur.com/3nTtWZt.png" /></p>
 <ul>
 <li><strong>RECORDES:</strong> Ao ser clicado, direciona o jogador para a tela de recordes.</li>
 <li><strong>AJUSTES:</strong> Ao ser clicado, direciona o jogador para a tela de ajustes.</li>
-<li><strong>JOGAR!:</strong> Ao ser clicado, inicia um jogo, com os ajustes padrões(caso nenhum ajuste tenha sido feito)</li>
+<li><strong>JOGAR:</strong> Ao ser clicado, inicia um jogo, com os ajustes que estejam selecionados.</li>
 </ul>
 <h3 id="tela-de-ajustes">Tela de Ajustes</h3>
-<p><img alt="" src="https://i.imgur.com/Fl5gJni.png" /></p>
-<p>Na tela de ajustes o jogador pode selecionar as configurações desejadas por ele para a partida. Será explicado cada forma de ajuste.</p>
-<p>OBS: Ao clicar no botão(amarelo) ele ficará pressionado e seu texto mudará para a cor vermelha. </p>
+<p><img alt="" src="https://i.imgur.com/FPYvtrM.png" /></p>
+<p>Na tela de ajustes o jogador pode selecionar as configurações desejadas por ele para a partida.</p>
 <h4 id="rotas">Rotas</h4>
 <ul>
 <li>
-<p><strong>Mostrar Dijkstra:</strong> Ao ser clicado configura o jogo para mostrar a rota calculada(usando o algoritmo de Dijkstra) pelo fantasma Blinky até o player. <em>Um dos fantasmas deve ser o Blinky para o botão ser ativado no jogo</em></p>
+<p><strong>Mostrar Dijkstra:</strong> Ao ser clicado configura o jogo para mostrar a rota calculada (usando o algoritmo de Dijkstra) pelo fantasma Blinky até o player. <em>Um dos fantasmas deve ser o Blinky para o botão ser ativado no jogo</em></p>
 </li>
 <li>
-<p><strong>Mostrar Bellman-Ford:</strong> Ao ser clicado, configura o jogo para mostrar a rota calculada(usando o algoritmo de Bellman-Ford) pelo fantasma Bordy até o player. <em>Um dos fantasmas deve ser o Bordy para o botão ser ativado no jogo</em></p>
+<p><strong>Mostrar Bellman-Ford:</strong> Ao ser clicado, configura o jogo para mostrar a rota calculada (usando o algoritmo de Bellman-Ford) pelo fantasma Bordy até o player. <em>Um dos fantasmas deve ser o Bordy para o botão ser ativado no jogo</em></p>
 </li>
 </ul>
 <h4 id="labirinto">Labirinto</h4>
 <ul>
 <li>
-<p><strong>Espelhar Labirinto:</strong> Ao ser clicado, configura o labirinto gerado para ser do tipo espelhado, dessa forma o algoritmo de geração do labirinto irá gerar apenas metade e será espelhado.</p>
+<p><strong>Espelhar Labirinto:</strong> Ao ser clicado, configura o labirinto gerado para ser do tipo espelhado, dessa forma o algoritmo de geração do labirinto irá gerar apenas metade e o resto será espelhado, simétrico no eixo Y.</p>
 </li>
 <li>
-<p><strong>Kruskal:</strong> Ao ser clicado, configura o o labirinto para ser gerado a partir do MST de um algoritmo ambicioso Kruskal. <strong>É o algoritmo utilizado como padrão do jogo, caso nenhum seja selecionada</strong></p>
+<p><strong>Kruskal:</strong> Ao ser clicado, configura o labirinto para ser gerado a partir da MST do algoritmo ambicioso de Kruskal. <strong>É o algoritmo utilizado como padrão do jogo, caso nenhum seja selecionado</strong></p>
 </li>
 <li>
-<p><strong>Kruskal:</strong> Ao ser clicado, configura o o labirinto para ser gerado a partir do MST de um algoritmo ambicioso Prim. </p>
+<p><strong>Prim:</strong> Ao ser clicado, configura o labirinto para ser gerado a partir da MST do algoritmo ambicioso de Prim. </p>
 </li>
 </ul>
 <h4 id="fantasmas">Fantasmas</h4>
-<p>O Paku-Paku tem 4 fantasmas no jogo e você pode selecionar quais fantasmas você quer. Ao clicar no botão o fantasma será trocado por outro, é possível escolher todos os 4 fantasmas e esses podem ser fantasmas de iguais.</p>
+<p>O Paku-Paku tem sempre 4 fantasmas que o perseguem durante o jogo e você pode selecionar quem são esses fantasmas. Ao clicar no botão o fantasma será trocado por outro, é possível escolher qualquer um entre todos os 5 fantasmas, inclusive fantasmas iguais.</p>
 <h2 id="como-usar">Como usar</h2>
 <h3 id="instalacao">Instalação</h3>
 <p><strong>Linguagem</strong>: Python<br>
 <strong>Framework</strong>: --- <br></p>
-<p><strong>Pré-requisitos</strong> para rodar o Paku-Paku 2:
-* Instale o <a href="https://www.python.org/downloads/">Python</a> (versão 3.8.5)
-* Instale o <a href="https://github.com/kitao/pyxel/blob/master/README.pt.md">Pyxel</a> (versão 1.4.3)</p>
+<p><strong>Pré-requisitos</strong> para rodar o Paku-Paku 2:<br />
+- Instale o <a href="https://www.python.org/downloads/">Python</a> (versão 3.8.5)<br />
+- Instale o <a href="https://github.com/kitao/pyxel/blob/master/README.pt.md">Pyxel</a> (versão 1.4.3)</p>
 <h3 id="instalar-e-executar-sistema-baseado-em-debian">Instalar e Executar (Sistema baseado em Debian)</h3>
 <pre><code>$ pip3 install pyxel 
 $ git clone https://github.com/projeto-de-algoritmos/Final_Paku-2.git
 $ cd Final_Paku-2/paku
 $ python3 game.py
 </code></pre>
-<h3 id="executar-via-release">Executar via release</h3>
+<!--### Executar via release-->
+
 <h2 id="como-jogar">Como jogar</h2>
-<p>Para jogar o Paku-Paku é bem simples, basta clicar no botão jogar da Tela de Menu(caso deseje clique no botão ajuste e faça as configurações desejadas). Ao clicar no botão o labirinto será gerado, após a geração do labirinto o Paku começara a se mover, para redireciona-lô basta pressionar as setinhas do teclado ou as teclas w-a-s-d. Tente sobreviver a perseguição dos fantasmas enquanto alimenta o Paku para conseguir a vitória.</p>
+<p>Para jogar o Paku-Paku é bem simples, basta clicar no botão jogar da Tela de Menu (caso deseje clique no botão ajustes primeiro e faça as configurações desejadas). Ao clicar no botão o labirinto será gerado, após a geração do labirinto o Paku começara a se mover, para redireciona-lô basta pressionar as setinhas do teclado ou as teclas w-a-s-d. Tente sobreviver a perseguição dos fantasmas enquanto alimenta o Paku para conseguir a vitória.</p>
 <h3 id="gif-demonstrativa">GIF demonstrativa</h3>
 <p><img alt="" src="https://i.imgur.com/1guR11m.gif" /></p>
                 
