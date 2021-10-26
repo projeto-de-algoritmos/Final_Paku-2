@@ -18,7 +18,7 @@ O Paku-Paku 2 é a evolução do Paku-Paku. Agora existem novos desafios e dific
 - Novas formas de gerar o labirinto 
     - Gere labirintos a partir do algoritmo ambicioso Kruskal
 - Um novo Fantasma está a solta.
-    - O Brody é um Fantasmas inteligente, que persegue o Paku utilizando o algoritmo de programação dinâmica Bellman-Ford
+    - O Bordy é um Fantasmas inteligente, que persegue o Paku utilizando o algoritmo de programação dinâmica Bellman-Ford
 - Melhore sua pontuação e crie recordes cada vez maiores, as 10 melhores pontuações são ordenadas pelo algoritmo de dividir e conquistar MergeSort
 - O Paku-Paku 2 esta de cara nova
     - Novos botões
@@ -31,16 +31,16 @@ O Paku-Paku 2 é a evolução do Paku-Paku. Agora existem novos desafios e dific
 
 ![](https://i.imgur.com/1guR11m.gif)
 ![](https://i.imgur.com/1gSXT6l.png)
-![](https://i.imgur.com/FPYvtrM.png)
+![](https://i.imgur.com/wBM6VRE.png)
 ![](https://i.imgur.com/GezBm8X.png)
 ![](https://i.imgur.com/d3f4BLT.png)
 ![](https://i.imgur.com/RFYafQp.png)
 
 ## Vídeo
 
-[![](---)](---)
+[![](https://www.youtube.com/watch?v=Vgq-Fw0WmMI)](https://www.youtube.com/watch?v=Vgq-Fw0WmMI)
 
-> ---
+> https://www.youtube.com/watch?v=Vgq-Fw0WmMI
 
 ## Instalação 
 **Linguagem**: Python<br>
@@ -56,6 +56,14 @@ O Paku-Paku 2 é a evolução do Paku-Paku. Agora existem novos desafios e dific
     $ git clone https://github.com/projeto-de-algoritmos/Final_Paku-2.git
     $ cd Final_Paku-2/paku
     $ python3 game.py
+
+### Instalar e Executar - Executavel(Sistema baseado em Debian)
+
+1. Faça o download: [https://github.com/projeto-de-algoritmos/Final_Paku-2/releases/tag/apk](https://github.com/projeto-de-algoritmos/Final_Paku-2/releases/tag/apk)
+2. Clique no arquivo com botão direito
+3. Selecione propriedades permissões
+4. Permita a execução do arquivo como um programa
+5. Clique duas vezes sobre o arquivo ou no cmd execute ./game
 
 ## Uso 
 
