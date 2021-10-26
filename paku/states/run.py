@@ -7,6 +7,7 @@ from globals import player1, ghosts, pellets_list
 from globals import dij_b, bf_b
 from states.gamestate import GameState
 
+# Estado principal onde o jogo em si roda
 class RunState(GameState):
     def __init__(self) -> None:
         super().__init__()
@@ -14,7 +15,6 @@ class RunState(GameState):
     def update(self):
         super().update()
         player1.update()
-        # (player1.atNode)
         
         if pyxel.frame_count % 30 == 0 and player1.isAlive:
             self.timer += 1
@@ -24,7 +24,7 @@ class RunState(GameState):
                 ghosts[i].friend_pos = [ghosts[(i+1)%4].posX, ghosts[(i+1)%4].posY]
             ghosts[i].update(player1.atNode, player1.facing)
 
-        # PLAYER PELLET COLISÃO
+        # COLISÃO PLAYER PELLET 
         player_pos = utils.get_pos_in_grid(player1.posX, player1.posY)
         pellet = pellets_list.pellets_dict.get(player_pos)
         if pellet != None:
@@ -38,8 +38,16 @@ class RunState(GameState):
             pellets_list.pellets_dict.pop(player_pos)
             player1.points += 10
 
-        # PLAYER GHOST COLISÃO
+        # frightened_flag = False
+        # song_playing = False
+        
+        # COLISÃO PLAYER GHOST 
         for ghost in ghosts:
+            # if ghost.state == "frightened":
+            #     frightened_flag = True
+            #     song_playing = True
+
+
             if utils.col_player_ghost(player1.posX, player1.posY, ghost.posX, ghost.posY):
                 if ghost.state == "chase" and player1.isAlive:
                     player1.kill_player()
@@ -49,6 +57,12 @@ class RunState(GameState):
                 elif ghost.state == "frightened":
                     player1.points += 100
                     ghost.change_state("eaten")
+
+        # if frightened_flag:
+        #     pyxel.playm(4, loop=True)
+        # elif song_playing:
+        #     song_playing = False
+        #     pyxel.stop()
 
         if pellets_list.pellets_dict == {}:
             globals.next_state = "win"

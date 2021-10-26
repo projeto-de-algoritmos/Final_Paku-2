@@ -17,12 +17,13 @@ class Clyde(Ghost):
         else:
             self.canTurn = False
 
+        # Movimentação aleatória
         if self.canTurn: 
             self.turn(self.random_move())
 
-       
         if self.state != "eaten":
             self.move()
+
     def reset(self, x, y):
         super().reset(x, y)
         self.color = 9

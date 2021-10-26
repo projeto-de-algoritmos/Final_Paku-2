@@ -58,10 +58,16 @@ class Blinky(Ghost):
         if self.state != "eaten":
             self.move()
 
-    # Dijkstra
+    # Calcula alvo do Blinky usando Dijkstra
     def calc_target_dijkstra(self, player_node):
-
-        visited = [] # Nós visitados
+        """
+        Calcula o caminho para o alvo do fantasma a partir de um 
+        algoritmo Dijkstra, e preenche o caminho a ser seguido pelo fantasma
+    
+        Params => player_node: Node
+        """
+        
+        visited = []
         end = player_node.get_id()
         current = self.atNode.get_id()
         pq  = []

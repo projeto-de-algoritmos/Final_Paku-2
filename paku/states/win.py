@@ -4,6 +4,7 @@ import pyxel
 
 from states.game_over import GameOverState
 
+# Estado chamado quando o player coleta todas as pellets (bolinhas) 
 class WinState(GameOverState):
     def __init__(self) -> None:
         super().__init__()

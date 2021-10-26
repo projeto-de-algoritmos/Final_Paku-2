@@ -3,7 +3,15 @@ from graph import Graph
 
 import random
 
+# Funções utilizadas em ambos os algoritmos de construção de labirinto
+
 def buildTree(edges):
+    """
+        Constrói uma arvore a partir de uma lista de edges
+        
+        Params => edges: list 
+        Return => path: Graph
+    """
     tree = Graph()
     for i in range(0, utils.GRID_WIDTH):
         for j in range(0, utils.GRID_HEIGHT):
@@ -15,6 +23,12 @@ def buildTree(edges):
 
 
 def breakWalls(path: Graph, edges):
+    """
+        Quebra paredes do labirinto
+
+        Params => path: Graph
+        Return => edges: list 
+    """
     for i in range(0, utils.GRID_WIDTH):
         for j in range(0, utils.GRID_HEIGHT):
             node = path.node_dict[utils.coord_str(i, j)]

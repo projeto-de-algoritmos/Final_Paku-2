@@ -6,6 +6,7 @@ import globals
 from globals import back_b
 from states.gamestate import GameState
 
+# Estado da tela de records
 class RecordsState(GameState):
     def __init__(self) -> None:
         super().__init__()
@@ -19,7 +20,9 @@ class RecordsState(GameState):
 
     def draw(self):
         super().draw()
-        #|--|#|NOME|PONTOS|TEMPO|--|
+
+        # Função responsável por desenhar a tabela de records usando o seguinte padrão
+        # |#|NOME|PONTOS|TEMPO|
         back_b.draw()
         
         pos_id = utils.WIDTH/2-100
@@ -27,16 +30,12 @@ class RecordsState(GameState):
         pos_points = utils.WIDTH/2-10
         pos_time = utils.WIDTH/2+60
         
-        # print((pyxel.frame_count%43 // 3)+1)
         pyxel.text(utils.align_text(utils.WIDTH/2, "RECORDS - TOP 10"), 10, "RECORDS - TOP 10", (pyxel.frame_count%40 // 3)+2)
         
-        # pyxel.text(pos_id, 30, "", 7)
         pyxel.text(pos_name,   35, "NOME", 7)
         pyxel.text(pos_points, 35, "PONTOS", 7)
         pyxel.text(pos_time,   35, "TEMPO", 7)
 
-        # if len(self.records) == 0:
-        #     self.records = 
         K = 45
         for i in range(0, min(len(self.records), 10)):
             time = int(self.records[i][2])

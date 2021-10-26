@@ -1,9 +1,16 @@
-# from utils import align_text, col_mouse_bt
-
 from math import dist
 import pyxel
 
+# Evitando import circular:
+# from utils import align_text, col_mouse_bt
+ 
 def align_text(x, str):
+    """
+        Função que alinha o texto dos botões
+
+        Params: x: int, str: String
+        Return: x: int
+    """
     n = len(str)
     return (x - (n * pyxel.FONT_WIDTH) / 2)
 
@@ -16,6 +23,10 @@ def col_mouse_bt(mx, my, btx, bty, btw, bth):
     else:
         return False
 
+# Fim da seção usada para evitar import circular
+
+
+# Classe Button abstrata, pai de todos os outros buttons
 class Button:
 
     def __init__(self, x, y, text):
@@ -58,6 +69,8 @@ class CircleButton(Button):
             else:
                 self.is_on = True
                 self.offset = 2
+
+            pyxel.playm(3, loop=False)
         else:
             if self.is_on:
                 self.offset = 2
@@ -111,6 +124,7 @@ class RectButton(Button):
 
         pyxel.text(align_text(self.posx, self.text)-self.offset, self.posy-self.offset-2, self.text, txt_color)
 
+# Botão de ativação única, (ou seja, não é do tipo 'toggle')
 class PushButton(Button):
     def __init__(self, x, y, text, r, textCenter=False):
         super().__init__(x, y, text)
@@ -128,6 +142,7 @@ class PushButton(Button):
             self.offset = 0
         elif pyxel.btnr(pyxel.MOUSE_LEFT_BUTTON) and  (dist(mouse_pos, bpos) < self.radius):
             self.offset = 2
+            pyxel.playm(3, loop=False)
             return True
         else:
             self.offset = 2
@@ -140,9 +155,8 @@ class PushButton(Button):
             pyxel.text(align_text(self.posx, self.text), self.posy-self.offset-2, self.text, 7)
         else:
             pyxel.text(align_text(self.posx, self.text), self.posy+self.radius+3, self.text, 7)
-        # pyxel.text(align_text(self.posx+1, self.text), self.posy-self.offset-1, self.text, 7)
-        # pyxel.text(align_text(self.posx, self.text), self.posy+self.radius+3, self.text, 7)
 
+# Botão Circular estilizado para o combinar com o Paku
 class PlayButton(CircleButton):
     def __init__(self, x, y, text, ):
         super().__init__(x, y, text)
@@ -162,23 +176,24 @@ class PlayButton(CircleButton):
         pos3 = [25, -21]
         pos4 = [22, 10]
 
-        # parte escura abaixo da boca
+        # Parte escura abaixo da boca
         pyxel.tri( self.posx+pos1[0], self.posy+4-self.offset+pos1[1], self.posx+pos2[0], self.posy+4-self.offset+pos2[1], self.posx+pos3[0], self.posy+4-self.offset+pos3[1], tmp_color)
         pyxel.tri( self.posx+pos4[0], self.posy+4-self.offset+pos4[1], self.posx+pos2[0], self.posy+4-self.offset+pos2[1], self.posx+pos3[0], self.posy+4-self.offset+pos3[1], tmp_color)
         
-        # abertura da boca
+        # Abertura da boca
         pyxel.tri(self.posx, self.posy+4-self.offset, self.posx+30, self.posy-20+4-self.offset, self.posx+30, self.posy+20+4-self.offset, 0)
 
-        # pequenas correcoes
+        # Pequenas correções
         pyxel.pset(self.posx+pos1[0], self.posy+4-self.offset+pos1[1], 10)
         pyxel.pset(self.posx+pos1[0]+1, self.posy+4-self.offset+pos1[1]+2, tmp_color)
 
-        # correcoes das pontas da boca
+        # Correções das pontas da boca
         pyxel.rect(self.posx+23, self.posy+15, 10, 10, 0)
         pyxel.rect(self.posx+24, self.posy-24, 10, 18, 0)
 
         pyxel.text(align_text(self.posx, self.text), self.posy+40, self.text, 7)
 
+# Outro botão Circular estilizado para o combinar com o Paku
 class ExitButton(CircleButton):
     def __init__(self, x, y, text):
         super().__init__(x, y, text)
@@ -189,5 +204,6 @@ class ExitButton(CircleButton):
         pyxel.circ(self.posx,  self.posy-self.offset, self.radius, 10)
         pyxel.circ(self.posx-10,  self.posy-15-self.offset, 3, 0)
         pyxel.circ(self.posx+10,  self.posy-15-self.offset, 3, 0)
+        # Boca opcional:
         # pyxel.line(self.posx-10, self.posy+10-self.offset, self.posx+10, self.posy+10-self.offset, 0)
         pyxel.text(align_text(self.posx, self.text), self.posy+40, self.text, 7)

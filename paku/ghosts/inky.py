@@ -1,6 +1,8 @@
 from ghosts.ghost import Ghost
 import utils
 
+import pyxel
+
 class Inky(Ghost):
     def __init__(self, x, y) -> None:
         super().__init__(x, y)
@@ -35,6 +37,7 @@ class Inky(Ghost):
         if self.state != "eaten":
             self.move()
 
+    # Calcula alvo do Inky usando o algoritmo do Pac-Man clássico tendo como base a posição de outro fantasma 
     def calc_target(self):
 
         target = [utils.GRID_WIDTH-1-self.friend_pos[0], utils.GRID_HEIGHT-1-self.friend_pos[1]]

@@ -1,5 +1,6 @@
 import utils
 
+# Classe Entidade abstrata, pai para o player e para os fantasmas
 class Entity:
     def __init__(self) -> None:
         self.posX = 0

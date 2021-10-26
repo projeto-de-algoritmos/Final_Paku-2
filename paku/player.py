@@ -2,6 +2,7 @@ import utils
 from entity import Entity
 import pyxel
 
+# Classe Player, responsável por tudo o que diz respeito ao Paku
 class Player(Entity):
     def __init__(self):
         super().__init__()

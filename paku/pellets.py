@@ -1,6 +1,7 @@
 import utils
 import pyxel
 
+# Classe responsável por administrar as pellets (bolinhas)
 class Pellets:
     def __init__(self) -> None:
         self.pellets_dict = {}

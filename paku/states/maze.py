@@ -6,6 +6,7 @@ import globals
 from globals import player1, ghosts, pellets_list, next_state
 from states.gamestate import GameState
 
+# Estado em que o labirinto está sendo construído na tela
 class MazeState(GameState):
     def __init__(self) -> None:
         super().__init__()

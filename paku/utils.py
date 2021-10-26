@@ -33,7 +33,9 @@ def get_height():
     return HEIGHT
 
 def change_state():
-    # print(globals.next_state)
+    """
+    Muda os estados da aplicação
+    """
     if globals.next_state != "":
 
 
@@ -98,9 +100,9 @@ def align_in_grid(x):
     return x*15+7
 
 def get_node_in_grid(x, y):
-    '''
+    """
         Recebe a posição na tela e retorna um String da posição no Grid
-    '''
+    """
     gx = x//15
     gy = y//15
 
@@ -113,6 +115,9 @@ def get_pos_in_grid(x, y):
     return (gx, gy)
 
 def draw_grid():
+    """
+    Desenha o grid sobre o qual será montado o labirinto
+    """
     for i in range(0, GRID_WIDTH+1):
         pyxel.line(15*i, 0, 15*i, GRID_HEIGHT*15, 5)
 
@@ -134,6 +139,12 @@ def rect_custom(x1, y1, x2, y2, color):
     pyxel.rect(x1, y1, x2-x1, y2-y1, color)
 
 def coord_str(x, y):
+    """
+    Transformar a coordenada de int para String
+
+    Params => x: int, y: int
+    Return => "x-y": String
+    """
     return (str(x) + "-" + str(y))
 
 def coord_int(coord):
@@ -164,7 +175,12 @@ def pick_ghost_info(id):
     return name, description
 
 def pick_ghost(id, pos_id):
-    
+    """
+        Retorna um Ghost a partir do id do fantasma escolhido
+
+        Params => id: int, pos_id: int
+        Return => Ghost
+    """
     pos = []
 
     if pos_id == 0:
@@ -211,7 +227,9 @@ def get_close_node(node: graph.Node, direction):
     return bro_node.get_id()
 
 def cave_paint(current, bro):
-
+    """
+        Apaga a fronteira entre dois nós no labirinto, formando um caminho
+    """
     current_pos = coord_int(current)
     bro_pos = coord_int(bro)
 
@@ -230,7 +248,11 @@ def cave_paint(current, bro):
     rect_custom(x1, y1, x2, y2, 0)
 
 def mirror():
+    """
+    Espelha o labirinto gerado pelo Prim ou Kruskal
 
+    Return => new_path: Graph
+    """
     new_path = graph.Graph()
 
     for i in range(0, GRID_WIDTH):
@@ -286,6 +308,9 @@ def mirror():
 
 
 def register_record(name, points, time):
+    """
+        Salva o score em um arquivo
+    """
     file_name = ".paku_records.txt"
     file = open(file_name, "a")
 
@@ -293,6 +318,11 @@ def register_record(name, points, time):
     file.close()
 
 def get_records():
+    """
+        Pega os scores salvos em um arquivo
+
+        Return => records: list
+    """
     records = []
     file_name = ".paku_records.txt"
 
@@ -310,6 +340,12 @@ def get_records():
 
 # MERGE SORT Adaptado com desempate
 def mergeSort(lst):
+    """
+        Ordena as pontuações da maior para menor, com desempate pelo menor tempo
+
+        Params => lst: list
+        Return => lst: list
+    """
     if len(lst) > 1:
         mid = len(lst)//2
   

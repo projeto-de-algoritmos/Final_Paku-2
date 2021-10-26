@@ -7,10 +7,8 @@ from states.gamestate import GameState
 WIDTH = 256
 HEIGHT = 196
 
-current_state = GameState()
-
-# global next_state
 next_state = "menu"
+current_state = GameState()
 
 player1 = player.Player()
 ghosts = []
@@ -24,7 +22,7 @@ start_b = PlayButton(WIDTH/2, HEIGHT/2, "JOGAR!")
 records_b = CircleButton(WIDTH/4-20, HEIGHT/2, "RECORDES")
 settings_b = CircleButton(WIDTH/2+WIDTH/4+20, HEIGHT/2, "AJUSTES")
 
-# BOTOES AJUSTES
+# BOTÕES AJUSTES
 mirror_b = CircleButton(WIDTH/4, HEIGHT/2, "Espelhar Labirinto", 12)
 mirror_b.description = "Gera o labirinto\nsimetrico no eixo Y"
 
@@ -48,6 +46,6 @@ back_b = PushButton(15, 15, "<", 5, textCenter=True)
 back_b.color = 10
 back_b.subcolor = 9
 
-# BOTOES GAME OVER
+# BOTÕES GAME OVER
 restart_b = PlayButton(WIDTH/2-60, HEIGHT/2, "Menu")
 exit_b = ExitButton(WIDTH/2+60, HEIGHT/2, "Sair")

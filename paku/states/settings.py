@@ -8,6 +8,7 @@ from globals import ghosts_id
 from globals import mirror_b, dij_b, bf_b, kruskal_b, prim_b, ghost1_b, ghost2_b, ghost3_b, ghost4_b, back_b
 from states.gamestate import GameState
 
+# Estado de configurações, chamado também de ajustes
 class SettingsState(GameState):
     def __init__(self) -> None:
         super().__init__()

@@ -3,7 +3,15 @@ from maze_utils import breakWalls, buildTree
 
 import heapq
 
+# Gera uma MST apartir do algoritmo de Prim
+
 def prim_maze(g, start, edges):
+    """
+    Gera uma MST, usada para desenhar o labirinto
+    
+    Params => g: Graph, start: String
+    Return => path: Graph, edges: list
+    """
     path = Graph()
     edges = []
     candidatas = []

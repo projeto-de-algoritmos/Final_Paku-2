@@ -7,11 +7,11 @@ from globals import player1
 from globals import dij_b, bf_b, restart_b, exit_b
 from states.gamestate import GameState
 
+# Estado chamado quando o player morre 
 class GameOverState(GameState):
     def __init__(self) -> None:
         super().__init__()
         self.title_text=""
-
 
     def update(self):
         super().update()

@@ -1,9 +1,6 @@
 from ghosts.ghost import Ghost
 import utils
 
-import random
-
-# Bellman Ford Ghost
 class Bordy(Ghost):
     def __init__(self, x, y) -> None:
         super().__init__(x, y)
@@ -63,8 +60,14 @@ class Bordy(Ghost):
         if self.state != "eaten":
             self.move()
 
-    # Bellman Ford
+    # Calcula alvo do Bordy usando Bellman-Ford
     def calc_target_bellman (self, player_node):
+        """
+        Calcula o caminho para o alvo do fantasma a partir de um 
+        algoritmo Bellman-Ford, e preenche o caminho a ser seguido pelo fantasma
+    
+        Params => player_node: Node
+        """
         dist = {}
         path = {}
         edges = []
@@ -80,7 +83,8 @@ class Bordy(Ghost):
 
         for _ in range(graph.num_nodes - 1):
             for u, v in edges:
-                w = 1 # random.randint(1,10)
+                # Possibilidade de atrasar o fantasma ao levar peso em consideração
+                w = 1 # random.randint(1,10) 
                 if dist[u] != float("Inf") and dist[u] + w < dist[v]:
                     dist[v] = dist[u] + w
                     path.update({v:u})

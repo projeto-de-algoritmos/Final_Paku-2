@@ -1,6 +1,8 @@
 from graph import Graph
 from maze_utils import breakWalls, buildTree
 
+# Gera uma MST apartir do algoritmo de Kruscal
+
 def find(parent, item):
     if parent[item] == item:
         return item
@@ -18,6 +20,12 @@ def union(parent, rank, x, y):
         rank[xroot] += 1
 
 def kruskal_maze(graph, edges):
+    """
+    Gera uma MST, que será usada para desenhar o labirinto
+    
+    Params => graph: Graph, edges: list
+    Return => path: Graph, edges: list
+    """
     path = Graph()
     i, e = 0, 0
     parent = {}

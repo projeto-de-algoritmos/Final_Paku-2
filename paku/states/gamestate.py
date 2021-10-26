@@ -1,11 +1,10 @@
 import pyxel
 
+# Classe abstrata, pai para todos os estados do jogo
 class GameState:
 
     def __init__(self):
         self.timer = 0
-        # self.state = "menu"
-        # self.points = 0
 
     def update(self):
         if pyxel.btnp(pyxel.KEY_Q):

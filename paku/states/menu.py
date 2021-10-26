@@ -6,6 +6,7 @@ import globals
 from globals import start_b, records_b, settings_b
 from states.gamestate import GameState
 
+# Estado Inicial, Menu principal
 class MenuState(GameState):
     def __init__(self) -> None:
         super().__init__()

@@ -5,6 +5,7 @@ import time
 import pyxel
 import random
 
+# Classe abstrata, pai para todos os fantasmas
 class Ghost(Entity):
     def __init__(self, x, y) -> None:
         super().__init__()

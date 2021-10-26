@@ -34,6 +34,7 @@ class Pinky(Ghost):
         if self.state != "eaten":
             self.move()
 
+    # Calcula alvo do Pinky usando o algoritmo do Pac-Man clássico tendo como base a posição em frente ao player 
     def calc_target(self, player_node, player_facing):
 
         target = utils.coord_int(player_node.get_id())
