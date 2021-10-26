@@ -5,7 +5,7 @@ import heapq
 
 # Gera uma MST apartir do algoritmo de Prim
 
-def prim_maze(g, start, edges):
+def prim_maze(g, start):
     """
     Gera uma MST, usada para desenhar o labirinto
     
