@@ -39,7 +39,7 @@ Para saber mais [clique aqui](https://projeto-de-algoritmos.github.io/Final_Paku
 
 ## Vídeo
 
-[![](https://www.youtube.com/watch?v=Vgq-Fw0WmMI)](https://www.youtube.com/watch?v=Vgq-Fw0WmMI)
+[![Video](https://img.youtube.com/vi/Vgq-Fw0WmMI/0.jpg)](https://www.youtube.com/watch?v=Vgq-Fw0WmMI)
 
 > https://www.youtube.com/watch?v=Vgq-Fw0WmMI
 
