@@ -26,6 +26,7 @@ O Paku-Paku 2 é a evolução do Paku-Paku. Agora existem novos desafios e dific
     - Uma tela para configurações do jogo
     - Melhora da trilha sonora
 
+Para saber mais [clique aqui](https://projeto-de-algoritmos.github.io/Final_Paku-2/)
 
 ## Screenshots
 
@@ -57,7 +58,7 @@ O Paku-Paku 2 é a evolução do Paku-Paku. Agora existem novos desafios e dific
     $ cd Final_Paku-2/paku
     $ python3 game.py
 
-### Instalar e Executar - Executavel(Sistema baseado em Debian)
+### Instalar e Executar - Executável (Sistema baseado em Debian)
 
 1. Faça o download: [https://github.com/projeto-de-algoritmos/Final_Paku-2/releases/tag/apk](https://github.com/projeto-de-algoritmos/Final_Paku-2/releases/tag/apk)
 2. Clique no arquivo com botão direito
